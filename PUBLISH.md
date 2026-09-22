@@ -27,22 +27,20 @@ cd "d:\A Remotion\加强版Remotion视频效果\geek-tech-short-skill"
 npx skills add YOUR_USER/geek-tech-short-skill -a cursor -y
 ```
 
-## 发布到 Gitee
+## 发布到 Gitee（已完成）
 
-1. 浏览器打开 https://gitee.com/projects/new 新建公开仓库 `geek-tech-short-skill`（不要勾选「使用 Readme 初始化」）。
-2. 本地：
+仓库：https://gitee.com/CodingKeep/geek-tech-short-skill
 
 ```powershell
 cd "d:\A Remotion\加强版Remotion视频效果\geek-tech-short-skill"
-git remote add origin https://gitee.com/YOUR_GITEE_USER/geek-tech-short-skill.git
-git branch -M main
+git remote add origin https://gitee.com/CodingKeep/geek-tech-short-skill.git
 git push -u origin main
 ```
 
 别人调用：
 
 ```bash
-npx skills add https://gitee.com/YOUR_GITEE_USER/geek-tech-short-skill.git -a cursor -y
+npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git -a cursor -y
 ```
 
 ## 验证安装
