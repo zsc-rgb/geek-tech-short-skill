@@ -1,0 +1,5 @@
+# Ignore local noise; skill markdown is the product
+.DS_Store
+Thumbs.db
+*.log
+.node_modules/
