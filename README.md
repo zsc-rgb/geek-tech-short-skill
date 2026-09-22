@@ -28,14 +28,20 @@
 ## 安装
 
 ```bash
+# GitHub（推荐国际访问）
+npx skills add AICodingKeep/geek-tech-short-skill -a cursor -y
+# 或完整 URL
+npx skills add https://github.com/AICodingKeep/geek-tech-short-skill.git -a cursor -y
+
+# Gitee（国内网络）
 npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git -a cursor -y
 ```
 
 全局 / 仅此 skill：
 
 ```bash
-npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git -a cursor -g -y
-npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git --skill geek-tech-short -a cursor -y
+npx skills add AICodingKeep/geek-tech-short-skill -a cursor -g -y
+npx skills add AICodingKeep/geek-tech-short-skill --skill geek-tech-short -a cursor -y
 ```
 
 手动：把 `skills/geek-tech-short/` 拷到项目 `.cursor/skills/` 或 `~/.cursor/skills/`。
