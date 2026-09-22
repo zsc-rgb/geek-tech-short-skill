@@ -12,6 +12,20 @@ description: >-
 
 Cold-black geek shorts that stay senior — **not** a single “红球堵车→绿代码” template.
 
+## What callers get
+
+After install, the Agent follows this engine instead of inventing a one-off Remotion layout:
+
+1. **Channel-consistent look** — cold black, no neon clutter / camera clipping / empty Hook void / hard cuts.
+2. **Three archetypes** — code-refactor · architecture-flow · benchmark-race (not only code morph).
+3. **Pluggable metaphors** — IO / water-tank / btree / threads / graph / bar-race so pain is visible in 3s.
+4. **Honest A/V clock** — `dynamic` ms→frame with TTS/Whisper; static frames only for silent UI preview.
+5. **Platform safe areas** — Douyin / 视频号 / Shorts / Bilibili presets.
+6. **Dry-goods floor** — pain hook + ≥1 production gotcha + 3 principles; CTA ≠ caption twins.
+7. **Clear ship path** — v2 `job.json` → components → [CHECKLIST.md](CHECKLIST.md).
+
+Human-facing pitch (Chinese): see repo root `README.md` on Gitee.
+
 | Doc | Purpose |
 |-----|---------|
 | [PROMPT.md](PROMPT.md) | Copy-paste production prompts |
