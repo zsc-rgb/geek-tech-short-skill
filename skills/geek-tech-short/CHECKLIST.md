@@ -1,37 +1,35 @@
-# Pre-publish checklist — geek-tech-short
+# Pre-publish checklist — geek-tech-short v2
 
-Play the MP4 once. Fail any ❌ before shipping.
+## Meta
+- [ ] `archetype` fits the topic (not forcing code-morph)
+- [ ] `platform` preset applied (safeBottom / safeRight / cardWidth)
+- [ ] `clock: "dynamic"` when narration exists; ms→frame for all beats
+- [ ] `metaphor.type` matches the pain (or justified `none` with filled lower half)
 
 ## Story / dry-goods
-- [ ] Hook number readable in first 1–2s
-- [ ] Contrast metaphor obvious without reading every line of code
-- [ ] ≥1 production gotcha (not only textbook tip)
-- [ ] CTA principles actionable and specific
-- [ ] Caption text ≠ CTA button text (no accidental twins)
+- [ ] Hook metric readable in 1–2s
+- [ ] Contrast / graph / race readable without reading every line
+- [ ] ≥1 production gotcha
+- [ ] 3 actionable principles
+- [ ] Caption ≠ CTA badge (no twins)
 
-## Layout / platform
-- [ ] No empty lower-half void in first ~4s (standby panel OK)
-- [ ] Card width ≤ 900 on 1080 canvas
-- [ ] Captions clear of Douyin bottom UI (`bottom ≥ 180`)
-- [ ] Top-right badge clear of Douyin right rail (~80–100px)
-- [ ] Code fully inside card; no clipped tokens
-
-## Code craft
-- [ ] Assignments prefer single line
-- [ ] Idiomatic merge names `(v1,v2)->v1` (or language equivalent)
-- [ ] Font ~32px; fits `CARD_W`
+## Layout
+- [ ] No empty lower-half void in Hook
+- [ ] Cards respect `PLATFORMS[platform].cardWidth`
+- [ ] Captions & badges clear of that platform’s UI chrome
+- [ ] Code (if any) fully inside card
 
 ## Motion / audio
-- [ ] No global camera scale clipping cards
-- [ ] Refactor→CTA soft fade (~0.5s) + slight rise; CTA scales in
-- [ ] Morph climax has Ding/Enter reward SFX
-- [ ] SFX present but not drowning narration
+- [ ] No global camera scale clipping
+- [ ] Soft resolve→CTA handoff (~0.5s, −20px; scale 0.95→1)
+- [ ] Ding/Enter on climax **aligned to dynamic clock**
+- [ ] SFX under narration
 
 ## Look
-- [ ] Cold black base; only danger/success/cyan accents
-- [ ] Floor grid alpha ~0.12–0.15, not neon-noisy
-- [ ] Red → green color story is clear
+- [ ] Cold black; only danger/success/cyan accents
+- [ ] Floor grid ~0.12–0.15
+- [ ] Red/congested → green/resolved story clear
 
 ## Ship
-- [ ] precompile (if needed) + lint clean
-- [ ] Spot-check Hook / Morph / CTA frames on the final MP4
+- [ ] v2 job.json committed / used
+- [ ] lint + render; spot-check Hook / Resolve / CTA frames
