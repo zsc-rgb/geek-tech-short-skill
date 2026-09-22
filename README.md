@@ -14,24 +14,23 @@
 仓库公开后，在任意 Remotion 项目里执行：
 
 ```bash
-# Gitee（国内推荐）
-npx skills add https://gitee.com/<你的用户名>/geek-tech-short-skill.git -a cursor -y
+npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git -a cursor -y
 
-# GitHub
-npx skills add <你的用户名>/geek-tech-short-skill -a cursor -y
+# GitHub（若已同步镜像）
+npx skills add CodingKeep/geek-tech-short-skill -a cursor -y
 ```
 
 只装这一条 skill、或装到全局：
 
 ```bash
-npx skills add https://gitee.com/<你的用户名>/geek-tech-short-skill.git --skill geek-tech-short -a cursor -y
-npx skills add https://gitee.com/<你的用户名>/geek-tech-short-skill.git -a cursor -g -y
+npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git --skill geek-tech-short -a cursor -y
+npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git -a cursor -g -y
 ```
 
 ### 方式 B — 手动复制
 
 ```bash
-git clone https://gitee.com/<你的用户名>/geek-tech-short-skill.git
+git clone https://gitee.com/CodingKeep/geek-tech-short-skill.git
 cp -r geek-tech-short-skill/skills/geek-tech-short your-project/.cursor/skills/
 # 或用户级：~/.cursor/skills/
 ```
