@@ -18,6 +18,9 @@ export const EditorialCard: React.FC<{
     subtitles.find((s) => frame >= s.startFrame && frame < s.endFrame) ??
     subtitles[subtitles.length - 1];
 
+  const cardTop = (EDITORIAL_LAYOUT.height - EDITORIAL_LAYOUT.cardHeight) / 2;
+  const captionTop = cardTop + EDITORIAL_LAYOUT.cardHeight + 28;
+
   return (
     <AbsoluteFill style={{ backgroundColor: EDITORIAL_THEME.stageBg }}>
       <div
@@ -39,19 +42,18 @@ export const EditorialCard: React.FC<{
           display: "flex",
           flexDirection: "column",
           boxSizing: "border-box",
-          padding: "28px 36px 22px",
+          padding: "36px 40px 28px",
         }}
       >
-        {/* Header */}
-        <div style={{ position: "relative", zIndex: 2, marginBottom: 14 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+        <div style={{ position: "relative", zIndex: 2, marginBottom: 18 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
             <span
               style={{
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 700,
-                color: EDITORIAL_THEME.accentBlue,
-                background: "rgba(37,99,235,0.08)",
-                padding: "4px 12px",
+                color: "#FFFFFF",
+                background: EDITORIAL_THEME.accentBlue,
+                padding: "5px 14px",
                 borderRadius: 999,
                 letterSpacing: "0.02em",
               }}
@@ -59,27 +61,26 @@ export const EditorialCard: React.FC<{
               {category}
             </span>
             {badge ? (
-              <span style={{ fontSize: 14, color: EDITORIAL_THEME.textMuted }}>{badge}</span>
+              <span style={{ fontSize: 15, color: EDITORIAL_THEME.textMuted }}>{badge}</span>
             ) : null}
           </div>
           <h1
             style={{
               margin: 0,
-              fontSize: 42,
-              lineHeight: 1.25,
+              fontSize: 44,
+              lineHeight: 1.28,
               fontWeight: 800,
               color: EDITORIAL_THEME.textTitle,
               fontFamily:
                 '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
               whiteSpace: "pre-line",
-              maxWidth: showMascot ? "78%" : "100%",
+              maxWidth: showMascot ? "76%" : "100%",
             }}
           >
             {title}
           </h1>
         </div>
 
-        {/* Widget */}
         <div
           style={{
             flex: 1,
@@ -93,40 +94,42 @@ export const EditorialCard: React.FC<{
           {children}
         </div>
 
-        {showMascot ? <MascotAvatar side="left" size={96} /> : null}
+        {showMascot ? <MascotAvatar side="left" size={100} /> : null}
+      </div>
 
-        {/* Integrated caption inside card bottom */}
+      {/* Caption lives in lower letterbox — outside the ivory card */}
+      {active?.text ? (
         <div
           style={{
-            marginTop: 12,
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: captionTop,
             display: "flex",
             justifyContent: "center",
-            zIndex: 3,
-            minHeight: 48,
-            alignItems: "center",
+            zIndex: 5,
+            opacity,
           }}
         >
-          {active?.text ? (
-            <div
-              style={{
-                maxWidth: "92%",
-                padding: "10px 20px",
-                borderRadius: 999,
-                background: EDITORIAL_THEME.captionPill,
-                color: EDITORIAL_THEME.captionText,
-                fontSize: 28,
-                fontWeight: 700,
-                textAlign: "center",
-                lineHeight: 1.35,
-                fontFamily:
-                  '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
-              }}
-            >
-              {active.text}
-            </div>
-          ) : null}
+          <div
+            style={{
+              maxWidth: 920,
+              padding: "12px 28px",
+              borderRadius: 999,
+              background: EDITORIAL_THEME.captionPill,
+              color: EDITORIAL_THEME.captionText,
+              fontSize: 30,
+              fontWeight: 700,
+              textAlign: "center",
+              lineHeight: 1.35,
+              fontFamily:
+                '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
+            }}
+          >
+            {active.text}
+          </div>
         </div>
-      </div>
+      ) : null}
     </AbsoluteFill>
   );
 };

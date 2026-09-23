@@ -1,5 +1,4 @@
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { EDITORIAL_THEME } from "./theme";
 
 /**
  * Minimal 2D mascot — geometric stand-in (no external PNG required).
@@ -48,20 +47,6 @@ export const MascotAvatar: React.FC<{
         />
         <rect x="58" y="70" width="22" height="28" rx="4" fill="#FAFAF9" stroke="#D6D3D1" />
       </svg>
-      <div
-        style={{
-          position: "absolute",
-          right: -6,
-          top: 8,
-          fontSize: 11,
-          color: EDITORIAL_THEME.textMuted,
-          background: "rgba(255,255,255,0.7)",
-          padding: "2px 6px",
-          borderRadius: 999,
-        }}
-      >
-        IP
-      </div>
     </div>
   );
 };
