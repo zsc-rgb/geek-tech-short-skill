@@ -26,6 +26,7 @@ npm run render:race
 npm run render:editorial-table   # UiMockup / SaaS table
 npm run render:editorial-icons   # IconGrid protocol wall
 npm run render:editorial-flow    # FlowStep A→B punchline
+npm run render:jev               # LangChain × Jev release short (~22s)
 ```
 
 ## Layout
@@ -49,6 +50,7 @@ npm run render:editorial-flow    # FlowStep A→B punchline
 | `EditorialTableShort` | Editorial | `DEMO_EDITORIAL_TABLE` |
 | `EditorialIconGridShort` | Editorial | `DEMO_EDITORIAL_ICONS` |
 | `EditorialFlowShort` | Editorial | `DEMO_EDITORIAL_FLOW` |
+| `JevReleaseShort` | Editorial | 3-beat Jev release (`DEMO_JEV_*`) |
 
 Edit Editorial copy/widgets in `src/EditorialShort/demos.ts`.
 
