@@ -36,6 +36,28 @@ Human-facing pitch (Chinese): see repo root `README.md` on Gitee.
 
 Install companions as needed: `remotion-dev/skills`, frame-driven `@shikijs/magic-move`.
 
+## Reference implementation (required reading)
+
+This skill ships a **renderable** Remotion mini-project:
+
+`reference/` (in the skill repo) → three compositions + metaphor widgets + dynamic clock scripts.
+
+```bash
+cd reference
+npm i
+npm run clock -- jobs/code-refactor.job.json   # or architecture-flow / benchmark-race
+npm run dev
+# npm run render:code | render:arch | render:race
+```
+
+| Composition | Archetype | Job |
+|-------------|-----------|-----|
+| `CodeRefactorShort` | code-refactor | `jobs/code-refactor.job.json` |
+| `ArchitectureFlowShort` | architecture-flow | `jobs/architecture-flow.job.json` |
+| `BenchmarkRaceShort` | benchmark-race | `jobs/benchmark-race.job.json` |
+
+Agent rule: **copy/adapt from `reference/src`** instead of inventing neon layouts from scratch. Metaphor switch = `MetaphorWidget` + `job.content.body.metaphor.type`. Clock = `scripts/derive-clock.mjs` (never hard-code production `hookEnd: 120` when narration exists).
+
 ---
 
 ## Agent workflow
@@ -312,11 +334,12 @@ SFX: `public/sfx/{alarm,woosh,keyboard,ping}.wav`.
 
 ## Ship
 
-1. Fill v2 `job.json` (`archetype` + `platform` + `metaphor` + gotcha).
-2. Pipeline TTS → Whisper → write `startMs`/`endMs` → `clock: "dynamic"`.
-3. `calculateMetadata` duration from last `endMs`.
-4. `precompile` (code) → lint → `npx remotion render … out/video.mp4`.
-5. [CHECKLIST.md](CHECKLIST.md) with **that** platform’s UI overlay in mind.
+1. Prefer starting from skill-repo `reference/` (three archetype demos).
+2. Fill v2 `job.json` (`archetype` + `platform` + `metaphor` + gotcha).
+3. Pipeline: edit `scenes[].startMs/endMs` → `node scripts/derive-clock.mjs jobs/….json` → `clock: "dynamic"`.
+4. Optional TTS/Whisper: see `reference/scripts/pipeline.mjs` comments, then re-derive clock.
+5. `npm run lint` / `tsc` → `npx remotion render <Id> out/video.mp4`.
+6. [CHECKLIST.md](CHECKLIST.md) with **that** platform’s UI overlay in mind.
 
 ---
 

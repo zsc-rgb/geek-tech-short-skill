@@ -19,7 +19,8 @@
 | **音画能对齐** | 有 TTS 用 `dynamic` 时钟（`startMs/endMs`→帧），Ding/变绿跟口播走；减少「话没说完画面已变绿」 |
 | **多平台不挡 UI** | 抖音 / 视频号 / Shorts / B 站安全区预设；改 `platform` 即可分发 |
 | **干货有底线** | 强制：痛点钩子 + ≥1 条线上避坑 + 三原则 CTA，且按钮与字幕不双胞胎 |
-| **交付路径清楚** | `job.json` v2 → 组件怎么挂 → `CHECKLIST` 出片；用 `PROMPT.md` 填空即可开工 |
+| **交付路径清楚** | `job.json` v2 → **reference 可渲染工程** → `CHECKLIST` 出片；`PROMPT.md` 填空即可开工 |
+| **可跑参考实现** | 仓库内 `reference/`：三形态 Composition + 隐喻组件 + `derive-clock` 动态时钟脚本 |
 
 **一句话：** 更快做出能发的专业向竖屏技术片，而不是偶然撞出一条好看的。
 
@@ -68,15 +69,25 @@ npx skills add zsc-rgb/geek-tech-short-skill --skill geek-tech-short -a cursor -
 ## 仓库结构
 
 ```
-skills/geek-tech-short/
-  SKILL.md       # Agent 主规范（自动加载）
-  VALUE.md       # 调用者能得到什么（价值说明）
-  PROMPT.md      # 新片 / 精修提示词
-  CHECKLIST.md   # 发布自检
-  examples.md    # 按形态选题包
-  schema.md      # job.json v2
-  metaphors.md   # 隐喻组件参数
+skills/geek-tech-short/   # Agent Skill 文档
+reference/                # 可渲染 Remotion 参考工程（三形态 + 隐喻 + 时钟）
+  jobs/*.job.json
+  scripts/derive-clock.mjs
+  scripts/pipeline.mjs
+  src/metaphors|archetypes|compositions/
 ```
+
+### 跑通参考片
+
+```bash
+cd reference
+npm i
+npm run clock -- jobs/code-refactor.job.json
+npm run dev
+# npm run render:code | render:arch | render:race
+```
+
+详见 [`reference/README.md`](reference/README.md)。
 
 ---
 

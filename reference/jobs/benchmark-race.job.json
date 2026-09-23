@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "topic": "FastAPI vs Go vs Spring 吞吐",
+    "archetype": "benchmark-race",
+    "platform": "douyin",
+    "clock": "dynamic"
+  },
+  "content": {
+    "hook": {
+      "headline": "同机跑分：谁的 QPS 更高？",
+      "metric": { "value": 3, "unit": "框架", "state": "warn" }
+    },
+    "body": {
+      "metaphor": { "type": "bar-race" },
+      "race": {
+        "unit": "QPS",
+        "contenders": [
+          { "id": "go", "label": "Go", "target": 92000 },
+          { "id": "fastapi", "label": "FastAPI", "target": 41000 },
+          { "id": "spring", "label": "Spring", "target": 28000 }
+        ]
+      },
+      "terminalLines": [
+        "$ wrk -t8 -c256 -d15s http://127.0.0.1:8080/ping",
+        "warmup 30s · payload 64B · same machine",
+        "Go net/http …… leading",
+        "FastAPI+uvicorn … mid",
+        "Spring Web … trailing"
+      ],
+      "gotcha": "必须公布 concurrency / payload / warmup"
+    },
+    "cta": {
+      "headline": "跑分可信三原则",
+      "principles": [
+        "同机同压同 payload",
+        "先 warmup 再采样",
+        "写清并发与定义"
+      ],
+      "badge": "评论区说你站谁"
+    }
+  },
+  "scenes": [
+    { "beat": "hook", "text": "别吵了，上跑分！", "startMs": 0, "endMs": 3500 },
+    { "beat": "analyze", "text": "同机同压，三条曲线开始拉开", "startMs": 3500, "endMs": 10000 },
+    { "beat": "resolve", "text": "Go 锁定胜出，但方法论更重要", "startMs": 10000, "endMs": 17000 },
+    { "beat": "cta", "text": "评论区说你站谁", "startMs": 17000, "endMs": 22000 }
+  ],
+  "config": { "width": 1080, "height": 1920, "fps": 30, "paddingBackMs": 100 }
+}

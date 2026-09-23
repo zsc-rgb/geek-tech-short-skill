@@ -1,0 +1,29 @@
+{
+  "name": "geek-tech-short-reference",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal Remotion reference for geek-tech-short archetypes + metaphor widgets",
+  "dependencies": {
+    "@remotion/cli": "4.0.526",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.526"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "studio": "remotion studio",
+    "clock": "node scripts/derive-clock.mjs",
+    "pipeline:clock": "node scripts/derive-clock.mjs",
+    "pipeline": "node scripts/pipeline.mjs",
+    "render:code": "npm run clock -- jobs/code-refactor.job.json && remotion render CodeRefactorShort out/code-refactor.mp4",
+    "render:arch": "npm run clock -- jobs/architecture-flow.job.json && remotion render ArchitectureFlowShort out/architecture-flow.mp4",
+    "render:race": "npm run clock -- jobs/benchmark-race.job.json && remotion render BenchmarkRaceShort out/benchmark-race.mp4",
+    "lint": "tsc --noEmit"
+  }
+}

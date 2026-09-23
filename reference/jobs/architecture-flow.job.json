@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "topic": "RAG 为何翻车",
+    "archetype": "architecture-flow",
+    "platform": "douyin",
+    "clock": "dynamic"
+  },
+  "content": {
+    "hook": {
+      "headline": "RAG 答非所问？先查召回",
+      "metric": { "value": 18, "unit": "%Hit", "state": "critical" }
+    },
+    "body": {
+      "metaphor": { "type": "node-graph" },
+      "graph": {
+        "nodes": [
+          { "id": "q", "label": "Query" },
+          { "id": "e", "label": "Embed" },
+          { "id": "v", "label": "Vector" },
+          { "id": "r", "label": "Rerank" },
+          { "id": "l", "label": "LLM" }
+        ],
+        "edges": [
+          { "from": "q", "to": "e" },
+          { "from": "e", "to": "v", "fail": true },
+          { "from": "v", "to": "r" },
+          { "from": "r", "to": "l" }
+        ]
+      },
+      "gotcha": "召回评估先于调 Prompt"
+    },
+    "cta": {
+      "headline": "RAG 避坑三原则",
+      "principles": [
+        "先测召回再调 Prompt",
+        "切片质量 > 模型大小",
+        "失败边要可观测"
+      ],
+      "badge": "收藏这套 RAG 排查清单"
+    }
+  },
+  "scenes": [
+    { "beat": "hook", "text": "别急着换大模型，先看召回！", "startMs": 0, "endMs": 4000 },
+    { "beat": "analyze", "text": "向量库这一跳命中率可能只有一成多", "startMs": 4000, "endMs": 10000 },
+    { "beat": "resolve", "text": "修好检索链路，回答立刻靠谱", "startMs": 10000, "endMs": 17000 },
+    { "beat": "cta", "text": "收藏这套 RAG 排查清单", "startMs": 17000, "endMs": 22000 }
+  ],
+  "config": { "width": 1080, "height": 1920, "fps": 30, "paddingBackMs": 100 }
+}
