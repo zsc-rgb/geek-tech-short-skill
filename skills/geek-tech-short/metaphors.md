@@ -1,5 +1,7 @@
 # Metaphor widget library
 
+**Renderable source of truth:** `reference/src/metaphors/` (`MetaphorWidget` switch).
+
 All widgets share lifecycle: **standby** (opacity ~0.3) → **active/danger** → **resolved/success**.
 
 Mount via `content.body.metaphor`:
