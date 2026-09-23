@@ -16,8 +16,10 @@ export const IconGridWidget: React.FC<{ items: IconGridItem[] }> = ({ items }) =
         gap: 18,
         width: "100%",
         maxWidth: 860,
-        padding: "8px 8px 8px 120px",
+        margin: "0 auto",
+        padding: "8px 16px",
         boxSizing: "border-box",
+        justifyItems: "center",
       }}
     >
       {list.map((item, i) => {

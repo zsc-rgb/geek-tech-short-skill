@@ -41,12 +41,33 @@ export const EditorialCard: React.FC<{
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           boxSizing: "border-box",
-          padding: "36px 40px 28px",
+          padding: "36px 48px 28px",
         }}
       >
-        <div style={{ position: "relative", zIndex: 2, marginBottom: 18 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            marginBottom: 18,
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              gap: 10,
+              marginBottom: 14,
+            }}
+          >
             <span
               style={{
                 fontSize: 16,
@@ -74,7 +95,8 @@ export const EditorialCard: React.FC<{
               fontFamily:
                 '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
               whiteSpace: "pre-line",
-              maxWidth: showMascot ? "76%" : "100%",
+              textAlign: "center",
+              maxWidth: "100%",
             }}
           >
             {title}
@@ -85,6 +107,7 @@ export const EditorialCard: React.FC<{
           style={{
             flex: 1,
             minHeight: 0,
+            width: "100%",
             position: "relative",
             display: "flex",
             alignItems: "center",
@@ -94,10 +117,10 @@ export const EditorialCard: React.FC<{
           {children}
         </div>
 
-        {showMascot ? <MascotAvatar side="left" size={100} /> : null}
+        {/* Corner decoration — must not offset centered stage content */}
+        {showMascot ? <MascotAvatar side="left" size={88} /> : null}
       </div>
 
-      {/* Caption lives in lower letterbox — outside the ivory card */}
       {active?.text ? (
         <div
           style={{

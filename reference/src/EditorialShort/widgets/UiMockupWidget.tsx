@@ -31,7 +31,7 @@ export const UiMockupWidget: React.FC<{ data: TableMockupData }> = ({ data }) =>
       style={{
         width: "100%",
         maxWidth: 720,
-        marginLeft: 80,
+        margin: "0 auto",
         opacity: enter,
         transform: `translateY(${interpolate(enter, [0, 1], [24, 0])}px) scale(${interpolate(enter, [0, 1], [0.96, 1])})`,
         background: "#FFFFFF",

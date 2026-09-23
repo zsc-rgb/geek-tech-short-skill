@@ -60,6 +60,8 @@
 
 ### Look / motion
 - [ ] Stage `#000` + card `#F7F4EB` (or paper-white); no Geek neon accents
+- [ ] Header / title / widget / caption **horizontally centered** (mascot does not shift layout)
+- [ ] Multi-line title/punchline uses `\n` with balanced wraps (no orphan last character)
 - [ ] Frame-driven springs only; no global camera scale
 - [ ] Captions clear of platform UI chrome
 - [ ] Optional mascot does not cover critical text

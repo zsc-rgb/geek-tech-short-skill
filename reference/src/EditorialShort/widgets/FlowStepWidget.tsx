@@ -31,17 +31,20 @@ export const FlowStepWidget: React.FC<{ data: FlowStep }> = ({ data }) => {
       style={{
         width: "100%",
         maxWidth: 820,
-        paddingLeft: 100,
+        margin: "0 auto",
+        padding: "0 16px",
         display: "flex",
         flexDirection: "column",
         gap: 36,
         alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <div
         style={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           gap: 16,
           fontSize: 26,
           fontWeight: 700,
@@ -80,12 +83,14 @@ export const FlowStepWidget: React.FC<{ data: FlowStep }> = ({ data }) => {
 
       <div
         style={{
-          fontSize: 36,
+          fontSize: 32,
           fontWeight: 800,
           color: EDITORIAL_THEME.textTitle,
           textAlign: "center",
-          lineHeight: 1.4,
-          maxWidth: 700,
+          lineHeight: 1.45,
+          maxWidth: 640,
+          width: "100%",
+          whiteSpace: "pre-line",
           opacity: punch,
           transform: `translateY(${interpolate(punch, [0, 1], [18, 0])}px)`,
           fontFamily: '"PingFang SC", Inter, system-ui, sans-serif',

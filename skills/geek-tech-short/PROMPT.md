@@ -71,9 +71,9 @@
 
 ### 视觉规范
 - 舞台 #000；卡片 #F7F4EB；标题 #1C1917；辅色蓝/橙/绿克制
-- 中心插槽用 StageWidget（reference/src/EditorialShort/StageWidget.tsx）
+- 中心插槽用 StageWidget；眉题/标题/组件/字幕一律水平居中；长标题/punchline 用 `\n` 均衡换行（禁止孤字落行）
 - 帧驱动 spring；禁止全局运镜；禁止混入 geek-dark 霓虹红绿
-- 字幕放在卡片下方 letterbox；零 PNG 依赖（吉祥物可关）
+- 字幕放在卡片下方 letterbox；零 PNG 依赖（吉祥物可关，且不得把主内容挤偏）
 
 ### 交付
 - 输出统一 job.json（meta.mode=editorial-warm）或 EditorialVideoConfig

@@ -124,6 +124,8 @@ Zero-asset rule: no required PNG/mascot files — `MascotAvatar` is geometric SV
 3. One widget type per composition.
 4. Frame-driven springs only (no CSS transitions / random timers).
 5. Captions sit in the lower letterbox; keep clear of platform UI chrome.
+6. **Center-aligned content** — category/badge row, title, StageWidget, and caption are horizontally centered on the card axis (`textAlign: "center"` + flex `alignItems/justifyContent: "center"`). Titles/punchlines use `\n` for balanced wraps — never leave a single orphan char on the next line. Mascot is a corner decoration only — never add left padding that shifts the stage off-center.
+7. No required PNG assets.
 
 ---
 

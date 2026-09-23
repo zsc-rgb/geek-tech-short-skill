@@ -112,7 +112,7 @@ export const DEMO_JEV_WHAT: EditorialVideoConfig = {
   widgetData: {
     from: "State 上下文",
     to: "类型化概率",
-    punchline: "System One：快、准、给软件直接用的答案。",
+    punchline: "System One：快、准、\n给软件直接用的答案。",
   },
   subtitles: [],
   durationInFrames: 300,
