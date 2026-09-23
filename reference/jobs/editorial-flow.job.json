@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "topic": "文档别只写是什么",
+    "mode": "editorial-warm",
+    "widget": { "type": "flow-step" },
+    "platform": "douyin",
+    "clock": "static"
+  },
+  "content": {
+    "header": {
+      "category": "「架构避坑」",
+      "title": "文档别只写「是什么」"
+    },
+    "badge": "知识库精选",
+    "widgetData": {
+      "from": "写是什么",
+      "to": "写什么时候用",
+      "punchline": "而要写什么时候应该用它。"
+    }
+  },
+  "scenes": [
+    { "beat": "hook", "text": "很多人写设计文档只写定义", "startMs": 0, "endMs": 4000 },
+    { "beat": "analyze", "text": "真正值钱的是：什么时候该用", "startMs": 4000, "endMs": 9000 },
+    { "beat": "resolve", "text": "边界条件写清楚，协作成本直接下降", "startMs": 9000, "endMs": 15000 }
+  ],
+  "config": { "width": 1080, "height": 1920, "fps": 30, "paddingBackMs": 100 }
+}

@@ -27,6 +27,9 @@
     "render:editorial-table": "remotion render EditorialTableShort out/editorial-table.mp4",
     "render:editorial-icons": "remotion render EditorialIconGridShort out/editorial-icons.mp4",
     "render:editorial-flow": "remotion render EditorialFlowShort out/editorial-flow.mp4",
+    "render:editorial-job": "npm run clock -- jobs/editorial-icons.job.json && remotion render EditorialFromJobShort out/editorial-from-job.mp4",
+    "render:editorial-job:table": "npm run clock -- jobs/editorial-table.job.json && remotion render EditorialFromJobShort out/editorial-from-job.mp4",
+    "render:editorial-job:flow": "npm run clock -- jobs/editorial-flow.job.json && remotion render EditorialFromJobShort out/editorial-from-job.mp4",
     "render:jev": "node scripts/tts-jev.mjs && remotion render JevReleaseShort out/jev-release.mp4",
     "tts:jev": "node scripts/tts-jev.mjs",
     "lint": "tsc --noEmit"

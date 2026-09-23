@@ -26,6 +26,9 @@ npm run render:race
 npm run render:editorial-table   # UiMockup / SaaS table
 npm run render:editorial-icons   # IconGrid protocol wall
 npm run render:editorial-flow    # FlowStep A→B punchline
+npm run render:editorial-job     # job.json → EditorialFromJobShort (default icons)
+npm run render:editorial-job:table
+npm run render:editorial-job:flow
 npm run render:jev               # TTS + LangChain × Jev release (~55s)
 npm run tts:jev                  # only regenerate Edge-TTS + jev-clock.json
 ```

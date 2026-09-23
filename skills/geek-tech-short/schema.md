@@ -136,7 +136,10 @@ type Config = {
 | `jobs/code-refactor.job.json` | geek-dark |
 | `jobs/architecture-flow.job.json` | geek-dark |
 | `jobs/benchmark-race.job.json` | geek-dark |
-| `jobs/editorial-icons.job.json` | editorial-warm |
+| `jobs/editorial-icons.job.json` | editorial-warm · icon-matrix |
+| `jobs/editorial-table.job.json` | editorial-warm · ui-mockup |
+| `jobs/editorial-flow.job.json` | editorial-warm · flow-step |
+| Composition `EditorialFromJobShort` | `npm run clock -- jobs/editorial-*.job.json` then render |
 | Jev TTS short | editorial-warm (`JevReleaseShort` + `jev-clock.json`) |
 
 ## Zero-asset rule

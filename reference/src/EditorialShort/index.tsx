@@ -1,6 +1,11 @@
 export { EditorialShort } from "./Short";
 export { StageWidget } from "../widgets/StageWidget";
 export {
+  EditorialFromJobShort,
+  editorialFromJobDuration,
+} from "./EditorialFromJobShort";
+export { editorialJobToConfig, scenesToSubtitles } from "./fromJob";
+export {
   DEMO_EDITORIAL_FLOW,
   DEMO_EDITORIAL_ICONS,
   DEMO_EDITORIAL_TABLE,

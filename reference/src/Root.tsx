@@ -5,6 +5,8 @@ import { ArchitectureFlowShort } from "./compositions/ArchitectureFlowShort";
 import { BenchmarkRaceShort } from "./compositions/BenchmarkRaceShort";
 import {
   EditorialShort,
+  EditorialFromJobShort,
+  editorialFromJobDuration,
   DEMO_EDITORIAL_FLOW,
   DEMO_EDITORIAL_ICONS,
   DEMO_EDITORIAL_TABLE,
@@ -15,19 +17,20 @@ import {
 const fps = 30;
 const fallbackDuration = 660;
 
-/** Geek-Dark durations always come from derived cuts (active-job.json). */
-const geekCalculateMetadata: CalculateMetadataFunction<Record<string, unknown>> =
-  async () => {
-    const durationInFrames = Math.max(
-      active?.cuts?.end ?? fallbackDuration,
-      30,
-    );
-    return {
-      durationInFrames,
-      fps: active?.fps ?? fps,
-      props: {},
-    };
+/** Duration from active-job.json cuts (geek or editorial). */
+const fromActiveJobMetadata: CalculateMetadataFunction<
+  Record<string, unknown>
+> = async () => {
+  const durationInFrames = Math.max(
+    active?.cuts?.end ?? fallbackDuration,
+    30,
+  );
+  return {
+    durationInFrames,
+    fps: active?.fps ?? fps,
+    props: {},
   };
+};
 
 export const RemotionRoot: React.FC = () => {
   const durationInFrames = active?.cuts?.end ?? fallbackDuration;
@@ -41,7 +44,7 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
-        calculateMetadata={geekCalculateMetadata}
+        calculateMetadata={fromActiveJobMetadata}
       />
       <Composition
         id="ArchitectureFlowShort"
@@ -50,7 +53,7 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
-        calculateMetadata={geekCalculateMetadata}
+        calculateMetadata={fromActiveJobMetadata}
       />
       <Composition
         id="BenchmarkRaceShort"
@@ -59,10 +62,10 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
-        calculateMetadata={geekCalculateMetadata}
+        calculateMetadata={fromActiveJobMetadata}
       />
 
-      {/* Warm Editorial / Notion Canvas */}
+      {/* Editorial demos (hardcoded props — quick Studio preview) */}
       <Composition
         id="EditorialTableShort"
         component={EditorialShort}
@@ -90,6 +93,18 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={{ config: DEMO_EDITORIAL_FLOW }}
       />
+
+      {/* editorial-warm from job.json via derive-clock */}
+      <Composition
+        id="EditorialFromJobShort"
+        component={EditorialFromJobShort}
+        durationInFrames={editorialFromJobDuration()}
+        fps={fps}
+        width={1080}
+        height={1920}
+        calculateMetadata={fromActiveJobMetadata}
+      />
+
       <Composition
         id="JevReleaseShort"
         component={JevReleaseShort}

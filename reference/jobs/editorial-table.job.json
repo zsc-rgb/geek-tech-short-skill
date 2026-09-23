@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "topic": "别再只让 AI 做表格",
+    "mode": "editorial-warm",
+    "widget": { "type": "ui-mockup" },
+    "platform": "douyin",
+    "clock": "static"
+  },
+  "content": {
+    "header": {
+      "category": "「AI 知识库」",
+      "title": "别再只让 AI\n“做一个表格”了"
+    },
+    "badge": "Sue 的 AI 知识库",
+    "widgetData": {
+      "title": "客户管理",
+      "subtitle": "全程一次生成，非常高级",
+      "actionLabel": "+ 新建客户",
+      "columns": ["客户名称", "标签", "金额 / 元", "负责人", "操作"],
+      "rows": [
+        ["星河科技", "重点用户", "128,000", "阿杰", "编辑"],
+        ["青柠工作室", "试用中", "12,600", "小雨", "编辑"],
+        ["北岛零售", "已成交", "86,400", "老周", "编辑"],
+        ["云端教育", "跟进中", "45,200", "Mia", "编辑"]
+      ],
+      "highlight": { "row": 2, "col": 2 }
+    }
+  },
+  "scenes": [
+    { "beat": "hook", "text": "让 AI 做个表格，数据少点看着挺好", "startMs": 0, "endMs": 4000 },
+    { "beat": "analyze", "text": "数据一旦破百，格式错乱、字段丢失", "startMs": 4000, "endMs": 10000 },
+    { "beat": "resolve", "text": "要的是可维护的业务系统，不是一张截图", "startMs": 10000, "endMs": 16000 }
+  ],
+  "config": { "width": 1080, "height": 1920, "fps": 30, "paddingBackMs": 100 }
+}
