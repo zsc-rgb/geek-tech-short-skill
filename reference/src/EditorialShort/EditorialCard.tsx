@@ -102,8 +102,8 @@ export const EditorialCard: React.FC<{
         <div
           style={{
             position: "absolute",
-            left: 0,
-            right: 0,
+            left: 40,
+            right: 40,
             top: captionTop,
             display: "flex",
             justifyContent: "center",
@@ -113,15 +113,17 @@ export const EditorialCard: React.FC<{
         >
           <div
             style={{
-              maxWidth: 920,
-              padding: "12px 28px",
-              borderRadius: 999,
+              maxWidth: 1000,
+              padding: active.text.length > 20 ? "14px 32px" : "12px 28px",
+              borderRadius: active.text.length > 18 ? 28 : 999,
               background: EDITORIAL_THEME.captionPill,
               color: EDITORIAL_THEME.captionText,
-              fontSize: 30,
+              fontSize: active.text.length > 32 ? 26 : 30,
               fontWeight: 700,
               textAlign: "center",
-              lineHeight: 1.35,
+              lineHeight: 1.4,
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
               fontFamily:
                 '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
             }}

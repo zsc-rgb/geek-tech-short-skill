@@ -194,25 +194,63 @@ export const JEV_VISUAL_BY_ID: Record<string, EditorialVideoConfig> = {
   cta: DEMO_JEV_TAKEAWAY,
 };
 
-/** Split narration into ~3 subtitle pills across local frames */
+/** Split narration into subtitle lines across local frames — never truncate with … */
 export function subtitlesFromNarration(
   narration: string,
   durationInFrames: number,
 ): EditorialVideoConfig["subtitles"] {
+  const softSplit = (s: string): string[] => {
+    if (s.length <= 24) return [s];
+    const byPause = s
+      .split(/[，、：:]/)
+      .map((x) => x.trim())
+      .filter(Boolean);
+    if (byPause.length >= 2) {
+      return byPause.flatMap((x) => softSplit(x));
+    }
+    // Prefer break at space (keep English words intact)
+    if (s.includes(" ")) {
+      const words = s.split(/\s+/);
+      const lines: string[] = [];
+      let buf = "";
+      for (const w of words) {
+        const next = buf ? `${buf} ${w}` : w;
+        if (next.length > 24 && buf) {
+          lines.push(buf);
+          buf = w;
+        } else {
+          buf = next;
+        }
+      }
+      if (buf) lines.push(buf);
+      return lines.length ? lines : [s];
+    }
+    // CJK-only: break near 20 without mid-run of ASCII
+    const lines: string[] = [];
+    let i = 0;
+    while (i < s.length) {
+      let end = Math.min(i + 20, s.length);
+      if (end < s.length) {
+        // avoid splitting ASCII token
+        while (end > i + 8 && /[A-Za-z0-9]/.test(s[end - 1]!)) end--;
+      }
+      lines.push(s.slice(i, end));
+      i = end;
+    }
+    return lines;
+  };
+
   const parts = narration
     .split(/[。！？；]/)
     .map((s) => s.trim())
-    .filter(Boolean);
-  const chunks =
-    parts.length >= 2
-      ? parts
-      : [narration.slice(0, Math.ceil(narration.length / 2)), narration.slice(Math.ceil(narration.length / 2))];
-  const n = Math.min(chunks.length, 4);
-  const slice = chunks.slice(0, n);
-  const step = Math.floor(durationInFrames / slice.length);
-  return slice.map((text, i) => ({
-    text: text.length > 28 ? `${text.slice(0, 27)}…` : text,
+    .filter(Boolean)
+    .flatMap(softSplit);
+
+  const chunks = parts.length >= 1 ? parts : [narration];
+  const step = Math.max(1, Math.floor(durationInFrames / chunks.length));
+  return chunks.map((text, i) => ({
+    text,
     startFrame: i * step,
-    endFrame: i === slice.length - 1 ? durationInFrames : (i + 1) * step,
+    endFrame: i === chunks.length - 1 ? durationInFrames : (i + 1) * step,
   }));
 }
