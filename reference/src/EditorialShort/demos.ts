@@ -81,7 +81,7 @@ export const DEMO_EDITORIAL_TABLE: EditorialVideoConfig = {
   durationInFrames: 450,
 };
 
-/** LangChain × TypeSafe Jev — release short (Warm Editorial) */
+/** LangChain × TypeSafe Jev — longer release beats (Warm Editorial) */
 export const DEMO_JEV_HOOK: EditorialVideoConfig = {
   theme: "warm-ivory",
   layout: "letterbox-card",
@@ -96,12 +96,26 @@ export const DEMO_JEV_HOOK: EditorialVideoConfig = {
     to: "Jev 判定",
     punchline: "分类不必再烧一整次生成。",
   },
-  subtitles: [
-    { startFrame: 0, endFrame: 70, text: "Agent 循环：想→调工具→再想，每步都贵" },
-    { startFrame: 70, endFrame: 150, text: "工具调用能结构化，但决策仍靠大模型" },
-    { startFrame: 150, endFrame: 210, text: "TypeSafe 的 Jev：专做快速结构化判定" },
-  ],
-  durationInFrames: 210,
+  subtitles: [],
+  durationInFrames: 300,
+};
+
+export const DEMO_JEV_WHAT: EditorialVideoConfig = {
+  theme: "warm-ivory",
+  layout: "letterbox-card",
+  header: {
+    category: "「是什么」",
+    title: "Jev：不做聊天\n只做结构化判定",
+  },
+  badge: "TypeSafe AI",
+  widgetType: "flow-step",
+  widgetData: {
+    from: "State 上下文",
+    to: "类型化概率",
+    punchline: "System One：快、准、给软件直接用的答案。",
+  },
+  subtitles: [],
+  durationInFrames: 300,
 };
 
 export const DEMO_JEV_TYPES: EditorialVideoConfig = {
@@ -109,26 +123,48 @@ export const DEMO_JEV_TYPES: EditorialVideoConfig = {
   layout: "letterbox-card",
   header: {
     category: "「System One」",
-    title: "Jev 不问聊天\n只答结构化问题",
+    title: "三种题型\n一次并行问完",
   },
-  badge: "TypeSafe AI",
+  badge: "Choice · Score · Noul",
   widgetType: "icon-grid",
   widgetData: [
-    { id: "choice", label: "Choice", color: "#2563EB", glyph: "☰" },
-    { id: "score", label: "Score", color: "#EA580C", glyph: "≡" },
+    { id: "choice", label: "Choice", color: "#2563EB", glyph: "C" },
+    { id: "score", label: "Score", color: "#EA580C", glyph: "S" },
     { id: "noul", label: "Noul", color: "#16A34A", glyph: "?" },
-    { id: "fast", label: "≈200×", color: "#0891B2", glyph: "⚡" },
+    { id: "fast", label: "≈200×", color: "#0891B2", glyph: "F" },
     { id: "cheap", label: "≈400×$", color: "#CA8A04", glyph: "$" },
     { id: "state", label: "State", color: "#7C3AED", glyph: "Σ" },
-    { id: "route", label: "Routing", color: "#DB2777", glyph: "⇄" },
+    { id: "route", label: "Routing", color: "#DB2777", glyph: "R" },
     { id: "auto", label: "AutoMode", color: "#DC2626", glyph: "A" },
   ],
-  subtitles: [
-    { startFrame: 0, endFrame: 80, text: "喂入 state，并行问 Choice / Score / Noul" },
-    { startFrame: 80, endFrame: 160, text: "官方称分类最高约 200× 更快、400× 更省" },
-    { startFrame: 160, endFrame: 240, text: "LangChain：路由模型，或拦危险工具调用" },
-  ],
-  durationInFrames: 240,
+  subtitles: [],
+  durationInFrames: 300,
+};
+
+export const DEMO_JEV_USECASE: EditorialVideoConfig = {
+  theme: "warm-ivory",
+  layout: "letterbox-card",
+  header: {
+    category: "「接到 LangChain」",
+    title: "路由模型\n或先拦危险工具",
+  },
+  badge: "ModelRouter · AutoMode",
+  widgetType: "ui-mockup",
+  widgetData: {
+    title: "Support Ticket · Jev",
+    subtitle: "state → questions → noul / choice",
+    actionLabel: "判定紧急",
+    columns: ["字段", "问题类型", "结果", "置信", "动作"],
+    rows: [
+      ["is_urgent", "Noul", "0.999", "高", "插队"],
+      ["route", "Choice", "powerful", "中", "换强模型"],
+      ["bash_ok", "Noul", "0.12", "高", "拦截"],
+      ["lookup", "Choice", "fast", "高", "走轻量"],
+    ],
+    highlight: { row: 0, col: 2 },
+  },
+  subtitles: [],
+  durationInFrames: 300,
 };
 
 export const DEMO_JEV_TAKEAWAY: EditorialVideoConfig = {
@@ -145,10 +181,38 @@ export const DEMO_JEV_TAKEAWAY: EditorialVideoConfig = {
     to: "Jev 分流",
     punchline: "开放推理留给 LLM，结构化决策交给 System One。",
   },
-  subtitles: [
-    { startFrame: 0, endFrame: 70, text: "Jev 不写长文，只吐类型化概率" },
-    { startFrame: 70, endFrame: 140, text: "简单任务走快模型，高风险走强模型" },
-    { startFrame: 140, endFrame: 210, text: "点赞收藏：Agent Harness 里该放 Jev 的位置" },
-  ],
-  durationInFrames: 210,
+  subtitles: [],
+  durationInFrames: 300,
 };
+
+/** Visual configs keyed by tts-jev beat id */
+export const JEV_VISUAL_BY_ID: Record<string, EditorialVideoConfig> = {
+  hook: DEMO_JEV_HOOK,
+  what: DEMO_JEV_WHAT,
+  types: DEMO_JEV_TYPES,
+  usecase: DEMO_JEV_USECASE,
+  cta: DEMO_JEV_TAKEAWAY,
+};
+
+/** Split narration into ~3 subtitle pills across local frames */
+export function subtitlesFromNarration(
+  narration: string,
+  durationInFrames: number,
+): EditorialVideoConfig["subtitles"] {
+  const parts = narration
+    .split(/[。！？；]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const chunks =
+    parts.length >= 2
+      ? parts
+      : [narration.slice(0, Math.ceil(narration.length / 2)), narration.slice(Math.ceil(narration.length / 2))];
+  const n = Math.min(chunks.length, 4);
+  const slice = chunks.slice(0, n);
+  const step = Math.floor(durationInFrames / slice.length);
+  return slice.map((text, i) => ({
+    text: text.length > 28 ? `${text.slice(0, 27)}…` : text,
+    startFrame: i * step,
+    endFrame: i === slice.length - 1 ? durationInFrames : (i + 1) * step,
+  }));
+}

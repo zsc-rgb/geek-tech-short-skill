@@ -1,0 +1,43 @@
+{
+  "fps": 30,
+  "voice": "zh-CN-YunjianNeural",
+  "rate": "+12%",
+  "totalFrames": 1638,
+  "scenes": [
+    {
+      "id": "hook",
+      "audio": "jev/scene-0.mp3",
+      "narration": "Agent 循环里，每想一步、调一次工具，再想一步，都可能再烧一次大模型。工具调用已经结构化了，可分类和分流决策，往往还在用最贵的方式做。",
+      "from": 0,
+      "durationInFrames": 373
+    },
+    {
+      "id": "what",
+      "audio": "jev/scene-1.mp3",
+      "narration": "TypeSafe 的 Jev 是 System One 模型：它不聊天、不写长文，只吃一段 state，再回答你定义好的结构化问题，并给出概率。",
+      "from": 373,
+      "durationInFrames": 277
+    },
+    {
+      "id": "types",
+      "audio": "jev/scene-2.mp3",
+      "narration": "三种题型：Choice 多选、Score 分级、Noul 是否题。一次请求可并行多问。官方称在分类任务上最高约两百倍更快、四百倍更省。",
+      "from": 650,
+      "durationInFrames": 351
+    },
+    {
+      "id": "usecase",
+      "audio": "jev/scene-3.mp3",
+      "narration": "接到 LangChain 以后，常见两种用法：模型路由，简单任务走快模型、难题走强模型；还有 Auto Mode，在执行危险工具前先用 Jev 拦一道。",
+      "from": 1001,
+      "durationInFrames": 333
+    },
+    {
+      "id": "cta",
+      "audio": "jev/scene-4.mp3",
+      "narration": "记住这套分工：开放推理留给大模型，结构化判定交给 Jev。点赞收藏，Agent Harness 里该放它的位置，就清楚了。",
+      "from": 1334,
+      "durationInFrames": 304
+    }
+  ]
+}

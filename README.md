@@ -29,7 +29,10 @@
 | **对比隐喻可装配** | Io / 水箱 / 索引树 / 线程池 / 节点图 / 柱状赛道（Geek-Dark） |
 | **音画能对齐** | Geek-Dark：`dynamic` 时钟；Editorial：帧区间字幕 |
 | **多平台不挡 UI** | 抖音 / 视频号 / Shorts / B 站安全区预设 |
-| **可跑参考实现** | `reference/`：6 条 Composition（3 Geek + 3 Editorial） |
+| **可跑参考实现** | `reference/`：Geek + Editorial + `JevReleaseShort`（含 Edge-TTS 样片） |
+| **演示成片** | 仓库 `demos/jev-release.mp4`（Warm Editorial 发布样例，约 55s） |
+
+> **默认不是只有这一种画面。** Skill 是双模：硬核重构/跑分用 **Geek-Dark**；知识库/产品发布用 **Warm Editorial**（本 Jev 片属于后者）。Agent 会按选题选引擎，不会强制 letterbox 象牙卡。
 
 ---
 
@@ -90,6 +93,23 @@ npm run render:editorial-table | render:editorial-icons | render:editorial-flow
 ```
 
 详见 [`reference/README.md`](reference/README.md)。
+
+---
+
+## 演示视频
+
+仓库内可直接下载预览：
+
+- **[demos/jev-release.mp4](demos/jev-release.mp4)** — LangChain × Jev（Warm Editorial + Edge-TTS，约 55 秒）
+
+重新生成：
+
+```bash
+cd reference
+npm run render:jev    # 会先跑 Edge-TTS 再渲染
+```
+
+体积约数 MB，适合放在 git 里给访客预览。更大成片建议改用 GitHub/Gitee **Releases** 附件，避免撑爆 clone。
 
 ---
 
