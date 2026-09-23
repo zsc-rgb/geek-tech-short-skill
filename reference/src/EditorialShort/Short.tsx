@@ -1,29 +1,13 @@
 import { AbsoluteFill } from "remotion";
 import { EditorialCard } from "./EditorialCard";
-import { IconGridWidget } from "./widgets/IconGridWidget";
-import { FlowStepWidget } from "./widgets/FlowStepWidget";
-import { UiMockupWidget } from "./widgets/UiMockupWidget";
-import type {
-  EditorialVideoConfig,
-  FlowStep,
-  IconGridItem,
-  TableMockupData,
-} from "./types";
+import { StageWidget } from "../widgets/StageWidget";
+import type { EditorialVideoConfig } from "./types";
 import { DEMO_EDITORIAL_TABLE } from "./demos";
 
 export const EditorialShort: React.FC<{
   config?: EditorialVideoConfig;
 }> = ({ config }) => {
   const cfg = config ?? DEMO_EDITORIAL_TABLE;
-
-  let widget: React.ReactNode = null;
-  if (cfg.widgetType === "icon-grid") {
-    widget = <IconGridWidget items={cfg.widgetData as IconGridItem[]} />;
-  } else if (cfg.widgetType === "flow-step") {
-    widget = <FlowStepWidget data={cfg.widgetData as FlowStep} />;
-  } else {
-    widget = <UiMockupWidget data={cfg.widgetData as TableMockupData} />;
-  }
 
   return (
     <AbsoluteFill>
@@ -34,7 +18,7 @@ export const EditorialShort: React.FC<{
         showMascot={cfg.showMascot !== false}
         subtitles={cfg.subtitles}
       >
-        {widget}
+        <StageWidget type={cfg.widgetType} data={cfg.widgetData} />
       </EditorialCard>
     </AbsoluteFill>
   );

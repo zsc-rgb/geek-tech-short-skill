@@ -1,4 +1,8 @@
-export type EditorialWidgetType = "icon-grid" | "ui-mockup" | "flow-step";
+export type EditorialWidgetType =
+  | "icon-grid"
+  | "icon-matrix"
+  | "ui-mockup"
+  | "flow-step";
 
 export type EditorialSubtitle = {
   startFrame: number;
@@ -34,12 +38,15 @@ export type TableMockupData = {
 export type TableProps = TableMockupData;
 
 export type EditorialVideoConfig = {
+  /** Always editorial-warm for this shell */
+  mode?: "editorial-warm";
   theme: "warm-ivory" | "paper-white";
   layout: "letterbox-card";
   header: {
     category: string;
     title: string;
   };
+  /** Prefer icon-matrix; icon-grid kept as alias */
   widgetType: EditorialWidgetType;
   widgetData: IconGridItem[] | FlowStep | TableMockupData;
   subtitles: EditorialSubtitle[];

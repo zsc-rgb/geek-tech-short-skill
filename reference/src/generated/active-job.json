@@ -2,6 +2,7 @@
   "sourceJob": "jobs/code-refactor.job.json",
   "fps": 30,
   "clock": "dynamic",
+  "mode": "geek-dark",
   "cuts": {
     "hookEnd": 120,
     "analyzeEnd": 300,
@@ -38,6 +39,7 @@
   "job": {
     "meta": {
       "topic": "Java 循环查库",
+      "mode": "geek-dark",
       "archetype": "code-refactor",
       "platform": "douyin",
       "clock": "dynamic"

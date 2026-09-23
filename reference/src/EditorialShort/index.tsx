@@ -1,4 +1,5 @@
 export { EditorialShort } from "./Short";
+export { StageWidget } from "../widgets/StageWidget";
 export {
   DEMO_EDITORIAL_FLOW,
   DEMO_EDITORIAL_ICONS,

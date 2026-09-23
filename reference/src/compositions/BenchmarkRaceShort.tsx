@@ -5,7 +5,7 @@ import { BenchmarkRaceStage } from "../archetypes/BenchmarkRaceStage";
 import type { PlatformId } from "../engine/theme";
 
 type AnyJob = {
-  meta: { archetype: string; platform: string };
+  meta: { archetype?: string; platform: string; mode?: string };
   content: {
     hook: { headline: string; metric: { value: number; unit: string } };
     body: Record<string, any>;
@@ -16,7 +16,7 @@ type AnyJob = {
 export const BenchmarkRaceShort: React.FC = () => {
   const cuts = active.cuts as SceneCut;
   const scenes = active.scenes as JobScene[];
-  const job = active.job as AnyJob;
+  const job = active.job as unknown as AnyJob;
   if (job.meta.archetype !== "benchmark-race") {
     return (
       <AbsoluteFill style={{ background: "#070A10", color: "#fff", padding: 40 }}>

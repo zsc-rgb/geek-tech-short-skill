@@ -1,102 +1,118 @@
-# Config schema (v2 · dual engine)
+# Config schema (v2.1 · dual mode)
 
-- **Geek-Dark** → `job.json` below (`meta.archetype` …).
-- **Warm Editorial** → `EditorialVideoConfig` at the bottom (not the same file format).
+One `job.json` shape for both engines. Switch with **`meta.mode`**.
+
+| `meta.mode` | Engine | Center stage |
+|-------------|--------|--------------|
+| `geek-dark` | Cold black + archetypes + metaphors | `code-morph` / graph / race via `meta.archetype` + `content.body.metaphor` |
+| `editorial-warm` | Letterbox ivory card | `meta.widget.type` → `<StageWidget />` |
 
 ---
-
-# job.json schema (Geek-Dark)
 
 ## Top level
 
 | Field | Type | Required | Notes |
 |-------|------|----------|-------|
-| `meta` | object | yes | topic, archetype, platform, clock |
-| `content` | object | yes | hook / body / cta |
-| `scenes` | array | yes | beat + text + timing |
+| `meta` | object | yes | **mode**, platform, clock, archetype or widget |
+| `content` | object | yes | hook/body/cta (geek) or header/widgetData (editorial) |
+| `scenes` | array | yes | beat + text + **startMs/endMs** when clock=dynamic |
 | `config` | object | yes | 1080×1920, fps, voice |
 
-## `meta`
+## `meta` (unified)
 
 ```ts
 type Meta = {
   topic: string;
-  archetype: "code-refactor" | "architecture-flow" | "benchmark-race";
+  /** Required — pick exactly one visual system */
+  mode: "geek-dark" | "editorial-warm";
   platform: "douyin" | "videoAccount" | "youtubeShorts" | "bilibili";
+  /**
+   * dynamic = production with narration (ms required on every scene).
+   * static = silent UI preview only — never ship with TTS.
+   */
   clock: "static" | "dynamic";
+  /** geek-dark only */
+  archetype?: "code-refactor" | "architecture-flow" | "benchmark-race";
+  /** editorial-warm only — StageWidget slot */
+  widget?: {
+    type: "icon-matrix" | "ui-mockup" | "flow-step" | "code-morph";
+    // aliases accepted: icon-grid → icon-matrix
+  };
 };
 ```
 
-## `content.hook`
+## Dynamic timeline contract
+
+```
+frame = Math.floor((ms / 1000) * fps)
+```
+
+- Prefer `scenes[].startMs` / `endMs` (Whisper or TTS length).
+- Optional summary beats object (documentation only; derive from scenes):
+
+```json
+"beats": {
+  "hookDurationMs": 3800,
+  "analyzeDurationMs": 6200,
+  "resolveDurationMs": 7500,
+  "ctaDurationMs": 4500
+}
+```
+
+`npm run clock -- jobs/….job.json` writes `src/generated/active-job.json` cuts.  
+Geek compositions use `calculateMetadata` from those cuts.  
+**Reject** `clock=dynamic` when any scene lacks ms (`derive-clock.mjs` exits 1).
+
+## Geek-Dark `content`
 
 ```ts
-type Hook = {
-  headline: string; // may include \n
-  metric: {
-    value: number;
-    unit: string; // "ms" | "%" | "QPS" | "MB" …
-    state: "critical" | "warn" | "ok";
+type GeekContent = {
+  hook: {
+    headline: string;
+    metric: { value: number; unit: string; state: "critical" | "warn" | "ok" };
   };
+  body: {
+    metaphor: {
+      type:
+        | "io-congestion"
+        | "water-tank"
+        | "btree-search"
+        | "thread-workers"
+        | "node-graph"
+        | "bar-race"
+        | "none";
+      params?: Record<string, unknown>;
+    };
+    code?: { lang?: string; bad: string; good: string; badFile?: string; goodFile?: string };
+    graph?: { nodes: unknown[]; edges: unknown[] };
+    race?: { contenders: unknown[]; series: unknown[]; unit: string };
+    gotcha: string; // required
+  };
+  cta: { headline: string; principles: string[]; badge: string };
 };
 ```
 
-## `content.body`
+## Editorial-warm `content`
 
 ```ts
-type Body = {
-  metaphor: {
-    type:
-      | "io-congestion"
-      | "water-tank"
-      | "btree-search"
-      | "thread-workers"
-      | "node-graph"
-      | "bar-race"
-      | "none";
-    params?: Record<string, unknown>;
-  };
-  /** code-refactor */
-  code?: {
-    lang: string;
-    badFile: string;
-    goodFile: string;
-    bad: string;
-    good: string;
-  };
-  /** architecture-flow */
-  graph?: {
-    nodes: Array<{ id: string; label: string; role?: string }>;
-    edges: Array<{ from: string; to: string; label?: string; state?: "ok" | "fail" }>;
-  };
-  /** benchmark-race */
-  race?: {
-    contenders: Array<{ id: string; label: string; color?: string }>;
-    series: Array<{ tMs: number; scores: Record<string, number> }>;
-    unit: string;
-  };
-  gotcha: string; // ≥1 production landmine — required
+type EditorialContent = {
+  header: { category: string; title: string };
+  badge?: string;
+  widgetData: IconGridItem[] | FlowStep | TableMockupData;
 };
 ```
 
-## `content.cta`
-
-```ts
-type Cta = {
-  headline: string;
-  principles: [string, string, string] | string[]; // prefer exactly 3
-  badge: string; // button; must not twin caption
-};
-```
+Runtime type also: `EditorialVideoConfig` in `reference/src/EditorialShort/types.ts`  
+(widgetType aliases: `icon-grid` ≡ `icon-matrix`).
 
 ## `scenes[]`
 
 ```ts
 type Scene = {
   beat: "hook" | "analyze" | "resolve" | "cta";
-  text: string; // TTS 口播
+  text: string;
   startMs?: number; // required if clock=dynamic
   endMs?: number;
-  visual?: string; // optional override hint
 };
 ```
 
@@ -107,55 +123,24 @@ type Config = {
   width: 1080;
   height: 1920;
   fps: 30;
-  voice: string;
-  rate?: string; // Edge-TTS e.g. "+28%"
+  voice?: string;
+  rate?: string;
   paddingBackMs?: number;
 };
 ```
 
-## v1 → v2 migration map
+## Samples
 
-| v1 | v2 |
-|----|----|
-| `content.titles.hook` | `content.hook.headline` |
-| `content.metrics.beforeMs` | `content.hook.metric.value` |
-| `content.code` | `content.body.code` |
-| `content.cta.prompt` | `content.cta.badge` |
-| `SCENE.refactorEnd` | `resolveEnd` |
-| fixed frames only | `meta.clock` + `scenes[].startMs/endMs` |
+| Job | mode |
+|-----|------|
+| `jobs/code-refactor.job.json` | geek-dark |
+| `jobs/architecture-flow.job.json` | geek-dark |
+| `jobs/benchmark-race.job.json` | geek-dark |
+| `jobs/editorial-icons.job.json` | editorial-warm |
+| Jev TTS short | editorial-warm (`JevReleaseShort` + `jev-clock.json`) |
 
----
+## Zero-asset rule
 
-# EditorialVideoConfig (Warm Editorial)
-
-Type source of truth: `reference/src/EditorialShort/types.ts`.
-
-```ts
-type EditorialWidgetType = "icon-grid" | "ui-mockup" | "flow-step";
-
-type EditorialVideoConfig = {
-  theme: "warm-ivory" | "paper-white";
-  layout: "letterbox-card";
-  header: { category: string; title: string };
-  widgetType: EditorialWidgetType;
-  widgetData: IconGridItem[] | FlowStep | TableMockupData;
-  subtitles: Array<{ startFrame: number; endFrame: number; text: string }>;
-  badge?: string;
-  showMascot?: boolean;
-  durationInFrames?: number;
-  fps?: number;
-};
-
-type IconGridItem = { id: string; label: string; color: string; glyph: string };
-type FlowStep = { from: string; to: string; punchline: string };
-type TableMockupData = {
-  title: string;
-  subtitle?: string;
-  columns: string[];
-  rows: string[][];
-  highlight?: { row: number; col: number };
-  actionLabel?: string;
-};
-```
-
-Samples: `reference/src/EditorialShort/demos.ts` → compositions `EditorialTableShort` / `EditorialIconGridShort` / `EditorialFlowShort`.
+- No required `assets/*.png` for icons or mascot.
+- Icon glyphs / Lucide-style letters in JSON; mascot = inline SVG geometry with CSS badge fallback.
+- UI mockup = pure CSS (no screenshots).

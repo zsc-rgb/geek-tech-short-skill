@@ -1,6 +1,7 @@
 {
   "meta": {
     "topic": "FastAPI vs Go vs Spring 吞吐",
+    "mode": "geek-dark",
     "archetype": "benchmark-race",
     "platform": "douyin",
     "clock": "dynamic"

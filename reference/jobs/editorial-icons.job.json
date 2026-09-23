@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "topic": "常见网络协议速查",
+    "mode": "editorial-warm",
+    "widget": { "type": "icon-matrix" },
+    "platform": "douyin",
+    "clock": "static"
+  },
+  "content": {
+    "header": {
+      "category": "「网络基础」",
+      "title": "计算机中常见的\n网络协议有哪些"
+    },
+    "badge": "@知识短视频",
+    "widgetData": [
+      { "id": "tcp", "label": "TCP/IP", "color": "#F97316", "glyph": "T" },
+      { "id": "udp", "label": "UDP", "color": "#EAB308", "glyph": "U" },
+      { "id": "dns", "label": "DNS", "color": "#22C55E", "glyph": "D" },
+      { "id": "dhcp", "label": "DHCP", "color": "#06B6D4", "glyph": "H" },
+      { "id": "http", "label": "HTTP", "color": "#3B82F6", "glyph": "h" },
+      { "id": "ftp", "label": "FTP", "color": "#38BDF8", "glyph": "F" },
+      { "id": "ssh", "label": "SSH", "color": "#A855F7", "glyph": ">" },
+      { "id": "smtp", "label": "SMTP", "color": "#EC4899", "glyph": "@" },
+      { "id": "tls", "label": "TLS/SSL", "color": "#EF4444", "glyph": "L" },
+      { "id": "ws", "label": "WebSocket", "color": "#D946EF", "glyph": "W" }
+    ]
+  },
+  "scenes": [
+    { "beat": "hook", "text": "先把这十个协议名字记住", "startMs": 0, "endMs": 4000 },
+    { "beat": "analyze", "text": "面试与排障都会反复碰到它们", "startMs": 4000, "endMs": 10000 },
+    { "beat": "resolve", "text": "收藏这份协议速查图", "startMs": 10000, "endMs": 15000 }
+  ],
+  "config": { "width": 1080, "height": 1920, "fps": 30, "paddingBackMs": 100 }
+}

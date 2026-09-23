@@ -11,11 +11,12 @@
 请按 skill「geek-tech-short」制作一条竖屏技术短视频（1080×1920，Remotion）。
 
 ### 引擎与形态（必填）
-- engine：geek-dark
-- archetype：【code-refactor | architecture-flow | benchmark-race】
+- mode：【geek-dark | editorial-warm】
+- （geek-dark）archetype：【code-refactor | architecture-flow | benchmark-race】
+- （editorial-warm）widget.type：【icon-matrix | ui-mockup | flow-step】
 - platform：【douyin | videoAccount | youtubeShorts | bilibili】
-- clock：有口播音频则用 dynamic（scenes 写 startMs/endMs）；仅 UI 调试可用 static
-- metaphor.type：【io-congestion | water-tank | btree-search | thread-workers | node-graph | bar-race | none】
+- clock：有口播 → dynamic（scenes 写 startMs/endMs）；仅 UI 调试可用 static（禁止带旁白出片）
+- metaphor.type（geek-dark）：【io-congestion | water-tank | btree-search | thread-workers | node-graph | bar-race | none】
 
 ### 选题
 - 痛点主题：【】
@@ -50,10 +51,11 @@
 请按 skill「geek-tech-short」的 Warm Editorial 引擎制作一条竖屏知识短视频（1080×1920）。
 
 ### 引擎与组件（必填）
-- engine：warm-editorial
+- mode：editorial-warm
 - layout：letterbox-card（黑底 + 居中象牙色卡片，勿拉满全高）
-- widgetType：【icon-grid | ui-mockup | flow-step】
+- widget.type：【icon-matrix | ui-mockup | flow-step】（icon-grid 为别名）
 - theme：warm-ivory
+- clock：有口播 → dynamic + startMs/endMs；无口播预览可用 static
 
 ### 文案
 - category（眉题，如「网络基础」）：【】
@@ -69,14 +71,14 @@
 
 ### 视觉规范
 - 舞台 #000；卡片 #F7F4EB；标题 #1C1917；辅色蓝/橙/绿克制
-- 参考 reference/src/EditorialShort/（Card + Widgets + Mascot）
-- 帧驱动 spring；禁止全局运镜；禁止混入 Geek-Dark 霓虹红绿
-- 字幕放在卡片下方 letterbox；可保留吉祥物
+- 中心插槽用 StageWidget（reference/src/EditorialShort/StageWidget.tsx）
+- 帧驱动 spring；禁止全局运镜；禁止混入 geek-dark 霓虹红绿
+- 字幕放在卡片下方 letterbox；零 PNG 依赖（吉祥物可关）
 
 ### 交付
-- 输出 EditorialVideoConfig（或改 demos.ts）
-- Studio 预览对应 Composition：EditorialIconGridShort / EditorialTableShort / EditorialFlowShort
-- lint → npm run render:editorial-* → CHECKLIST（Editorial 段）自检
+- 输出统一 job.json（meta.mode=editorial-warm）或 EditorialVideoConfig
+- Studio：EditorialIconGridShort / EditorialTableShort / EditorialFlowShort / JevReleaseShort
+- lint → render → CHECKLIST 自检
 ```
 
 ---
@@ -96,13 +98,13 @@
 
 ## 快速选型口诀
 
-| 选题感觉 | engine | 形态 / widget |
-|----------|--------|----------------|
+| 选题感觉 | mode | 形态 / widget |
+|----------|------|----------------|
 | 坏代码→好代码 | geek-dark | code-refactor + io/water-tank… |
 | 讲清链路/原理 | geek-dark | architecture-flow + node-graph |
 | A vs B 跑分 | geek-dark | benchmark-race + bar-race |
-| 协议/概念速查墙 | warm-editorial | icon-grid |
-| SaaS/表格产品感 | warm-editorial | ui-mockup |
-| A→B 认知升级一句 | warm-editorial | flow-step |
+| 协议/概念速查墙 | editorial-warm | icon-matrix |
+| SaaS/表格产品感 | editorial-warm | ui-mockup |
+| A→B 认知升级一句 | editorial-warm | flow-step |
 
 完整 schema → [schema.md](schema.md) · 隐喻 → [metaphors.md](metaphors.md) · 案例 → [examples.md](examples.md)

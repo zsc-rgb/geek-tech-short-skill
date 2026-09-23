@@ -1,4 +1,4 @@
-import { Composition } from "remotion";
+import { Composition, CalculateMetadataFunction } from "remotion";
 import active from "./generated/active-job.json";
 import { CodeRefactorShort } from "./compositions/CodeRefactorShort";
 import { ArchitectureFlowShort } from "./compositions/ArchitectureFlowShort";
@@ -15,6 +15,20 @@ import {
 const fps = 30;
 const fallbackDuration = 660;
 
+/** Geek-Dark durations always come from derived cuts (active-job.json). */
+const geekCalculateMetadata: CalculateMetadataFunction<Record<string, unknown>> =
+  async () => {
+    const durationInFrames = Math.max(
+      active?.cuts?.end ?? fallbackDuration,
+      30,
+    );
+    return {
+      durationInFrames,
+      fps: active?.fps ?? fps,
+      props: {},
+    };
+  };
+
 export const RemotionRoot: React.FC = () => {
   const durationInFrames = active?.cuts?.end ?? fallbackDuration;
 
@@ -27,6 +41,7 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
+        calculateMetadata={geekCalculateMetadata}
       />
       <Composition
         id="ArchitectureFlowShort"
@@ -35,6 +50,7 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
+        calculateMetadata={geekCalculateMetadata}
       />
       <Composition
         id="BenchmarkRaceShort"
@@ -43,6 +59,7 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
+        calculateMetadata={geekCalculateMetadata}
       />
 
       {/* Warm Editorial / Notion Canvas */}
@@ -80,6 +97,10 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={1080}
         height={1920}
+        calculateMetadata={async () => ({
+          durationInFrames: JEV_RELEASE_DURATION,
+          fps,
+        })}
       />
     </>
   );

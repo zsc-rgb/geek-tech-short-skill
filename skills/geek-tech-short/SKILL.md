@@ -1,30 +1,30 @@
 ---
 name: geek-tech-short
 description: >-
-  Dual-engine Remotion skill for vertical tech shorts (1080×1920): Geek-Dark
-  (cold-black, 4-beat, code-refactor | architecture-flow | benchmark-race + metaphors)
-  and Warm Editorial / Notion Canvas (letterbox black + ivory card, IconGrid |
-  UiMockup | FlowStep + mascot). Use for Douyin/视频号/Shorts programmer videos,
-  知识库/产品科普, 性能优化/架构/跑分/避坑, or geek-tech-short / 极客短视频 /
-  暖调社论 / Notion Canvas.
+  Dual-mode Remotion skill for vertical tech shorts (1080×1920). Switch via
+  job.json meta.mode: geek-dark (cold-black archetypes + metaphors) or
+  editorial-warm (letterbox ivory card + StageWidget icon-matrix | ui-mockup |
+  flow-step). Dynamic ms→frame clock; zero required PNG assets. Use for
+  Douyin/视频号/Shorts, 知识库/产品科普, 性能/架构/跑分, or geek-tech-short /
+  极客短视频 / 暖调社论 / Notion Canvas.
 ---
 
 # Geek Tech Short — Dual Engine
 
-Two parallel visual engines share the same skill. **Pick one per video** — never mix themes in a single composition.
+Two parallel visual engines share the same skill. **Pick one per video** via `meta.mode` — never mix themes in a single composition.
 
-| Engine | Feel | Best for |
-|--------|------|----------|
-| **Geek-Dark** | Cold black `#070A10`, danger/success accents, full-bleed stage | 重构避坑 · 架构原理 · 跑分对决 · 硬核程序员频道 |
-| **Warm Editorial** | Letterbox black + ivory card `#F7F4EB`, Notion-like calm | 知识库 · 产品/AI 科普 · 协议速查 · 低压迫感学习感 |
+| `meta.mode` | Feel | Best for |
+|-------------|------|----------|
+| **`geek-dark`** | Cold black `#070A10`, danger/success accents, full-bleed stage | 重构避坑 · 架构原理 · 跑分对决 · 硬核程序员频道 |
+| **`editorial-warm`** | Letterbox black + ivory card `#F7F4EB`, Notion-like calm | 知识库 · 产品/AI 科普 · 协议速查 · 低压迫感学习感 |
 
 ## What callers get
 
-1. **Engine choice first** — Geek-Dark vs Warm Editorial.
-2. **Geek-Dark** — 3 archetypes + pluggable metaphors + dynamic clock + platform safe areas.
-3. **Warm Editorial** — letterbox-card + IconGrid / UiMockup / FlowStep + optional mascot.
-4. **Dry-goods floor** — pain/insight hook + actionable takeaway; CTA ≠ caption twins.
-5. **Ship path** — config/`job.json` → `reference/` → [CHECKLIST.md](CHECKLIST.md).
+1. **`meta.mode` first** — geek-dark vs editorial-warm.
+2. **geek-dark** — 3 archetypes + pluggable metaphors + dynamic clock + platform safe areas.
+3. **editorial-warm** — letterbox-card + StageWidget (`icon-matrix` / `ui-mockup` / `flow-step`) + optional CSS mascot (zero PNG deps).
+4. **Dynamic timeline** — production narration ⇒ `clock: "dynamic"` + scene ms; `derive-clock` + `calculateMetadata`.
+5. **Ship path** — v2.1 `job.json` → `reference/` → [CHECKLIST.md](CHECKLIST.md).
 
 | Doc | Purpose |
 |-----|---------|
@@ -39,32 +39,34 @@ Two parallel visual engines share the same skill. **Pick one per video** — nev
 ```bash
 cd reference
 npm i
-npm run clock -- jobs/code-refactor.job.json   # Geek-Dark only
+npm run clock -- jobs/code-refactor.job.json
+npm run clock -- jobs/editorial-icons.job.json
 npm run dev
-# Geek-Dark:  npm run render:code | render:arch | render:race
-# Editorial:  npm run render:editorial-table | render:editorial-icons | render:editorial-flow
+# Geek: npm run render:code | render:arch | render:race
+# Editorial + Jev TTS: render:editorial-* | render:jev
 ```
 
-| Composition | Engine | Source |
-|-------------|--------|--------|
-| `CodeRefactorShort` | Geek-Dark | `jobs/code-refactor.job.json` |
-| `ArchitectureFlowShort` | Geek-Dark | `jobs/architecture-flow.job.json` |
-| `BenchmarkRaceShort` | Geek-Dark | `jobs/benchmark-race.job.json` |
-| `EditorialTableShort` | Warm Editorial | `DEMO_EDITORIAL_TABLE` (ui-mockup) |
-| `EditorialIconGridShort` | Warm Editorial | `DEMO_EDITORIAL_ICONS` (icon-grid) |
-| `EditorialFlowShort` | Warm Editorial | `DEMO_EDITORIAL_FLOW` (flow-step) |
+| Composition | mode | Source |
+|-------------|------|--------|
+| `CodeRefactorShort` | geek-dark | `jobs/code-refactor.job.json` |
+| `ArchitectureFlowShort` | geek-dark | `jobs/architecture-flow.job.json` |
+| `BenchmarkRaceShort` | geek-dark | `jobs/benchmark-race.job.json` |
+| `EditorialTableShort` | editorial-warm | `DEMO_EDITORIAL_TABLE` |
+| `EditorialIconGridShort` | editorial-warm | `DEMO_EDITORIAL_ICONS` / `jobs/editorial-icons.job.json` |
+| `EditorialFlowShort` | editorial-warm | `DEMO_EDITORIAL_FLOW` |
+| `JevReleaseShort` | editorial-warm | Edge-TTS `jev-clock.json` |
 
-Agent rule: **copy/adapt from `reference/src`**. Geek-Dark metaphors via `MetaphorWidget`. Editorial via `reference/src/EditorialShort/`.
+Agent rule: **copy/adapt from `reference/src`**. Editorial center = `<StageWidget />`. Geek metaphors = `MetaphorWidget`.
 
 ---
 
-## Engine picker (Agent must ask or infer)
+## Engine picker → `meta.mode`
 
-| Signal in the brief | Engine |
-|---------------------|--------|
-| 重构 / N+1 / 跑分 / 冷黑 / IDE / 红绿对比 | **Geek-Dark** |
-| 知识库 / Notion / 协议图标墙 / SaaS 表格 / 暖纸 / 吉祥物 | **Warm Editorial** |
-| Unclear | Ask once; default Geek-Dark for hardcore eng topics |
+| Signal in the brief | `meta.mode` |
+|---------------------|-------------|
+| 重构 / N+1 / 跑分 / 冷黑 / IDE / 红绿对比 | **`geek-dark`** |
+| 知识库 / Notion / 协议图标墙 / SaaS 表格 / 暖纸 / 发布科普 | **`editorial-warm`** |
+| Unclear | Ask once; default `geek-dark` for hardcore eng topics |
 
 ---
 
@@ -72,16 +74,16 @@ Agent rule: **copy/adapt from `reference/src`**. Geek-Dark metaphors via `Metaph
 
 ```
 Task Progress:
-- [ ] 1. Pick ENGINE (geek-dark | warm-editorial)
-- [ ] 2a. Geek-Dark → archetype + platform + metaphor + gotcha
-- [ ] 2b. Editorial → widgetType (icon-grid | ui-mockup | flow-step) + header + punchline
-- [ ] 3. Write job.json (Geek) OR EditorialVideoConfig (Editorial)
-- [ ] 4. Mount from reference/src — do not invent neon / purple gradients
-- [ ] 5. Soft motion only (spring / interpolate); no global camera scale
+- [ ] 1. Set meta.mode (geek-dark | editorial-warm)
+- [ ] 2a. geek-dark → archetype + metaphor + gotcha
+- [ ] 2b. editorial-warm → widget.type (icon-matrix | ui-mockup | flow-step)
+- [ ] 3. Write job.json; if narration → clock=dynamic + startMs/endMs
+- [ ] 4. npm run clock -- jobs/….json  (rejects dynamic without ms)
+- [ ] 5. Mount StageWidget / archetype from reference/src — no neon inventing
 - [ ] 6. lint → render → CHECKLIST.md
 ```
 
-Without a Geek-Dark gotcha, the video stays “入门八股” — reject and ask for one.
+Without a geek-dark gotcha, the video stays “入门八股” — reject and ask for one.
 
 ---
 
@@ -103,15 +105,15 @@ EDITORIAL_THEME = {
 }
 ```
 
-**Widgets** (pick one per video):
+**Widgets** via `<StageWidget />` (`reference/src/EditorialShort/StageWidget.tsx`):
 
-| `widgetType` | Component | Use when |
-|--------------|-----------|----------|
-| `icon-grid` | `IconGridWidget` | 协议/工具/概念速查墙（彩色圆标逐个 pop） |
-| `ui-mockup` | `UiMockupWidget` | SaaS/Notion 表格式产品界面 + 光标/高亮 |
-| `flow-step` | `FlowStepWidget` | A→B 认知升级一句 punchline |
+| `widget.type` / `widgetType` | Component | Use when |
+|------------------------------|-----------|----------|
+| `icon-matrix` (alias `icon-grid`) | `IconGridWidget` | 协议/工具/概念速查墙 |
+| `ui-mockup` | `UiMockupWidget` | SaaS/Notion 表格 + 光标 |
+| `flow-step` | `FlowStepWidget` | A→B 认知升级 |
 
-**Chrome:** category eyebrow + bold title on card; dark caption pill under card; optional `MascotAvatar` + badge. No cold neon, no full-bleed code IDE.
+Zero-asset rule: no required PNG/mascot files — `MascotAvatar` is geometric SVG; omit via `showMascot: false`.
 
 **Config type:** `EditorialVideoConfig` in `reference/src/EditorialShort/types.ts`.
 

@@ -1,6 +1,7 @@
 {
   "meta": {
     "topic": "Java 循环查库",
+    "mode": "geek-dark",
     "archetype": "code-refactor",
     "platform": "douyin",
     "clock": "dynamic"

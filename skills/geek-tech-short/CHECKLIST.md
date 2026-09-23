@@ -1,16 +1,22 @@
 # Pre-publish checklist — geek-tech-short (dual engine)
 
 ## Engine
-- [ ] One engine only: **Geek-Dark** or **Warm Editorial** (no mixed palettes)
+- [ ] One mode only: **`geek-dark`** or **`editorial-warm`** (no mixed palettes)
+- [ ] `meta.mode` set in job.json (or EditorialVideoConfig for warm demos)
+
+## Timeline (critical)
+- [ ] Narration present ⇒ `clock: "dynamic"` and every scene has `startMs`/`endMs`
+- [ ] Ran `npm run clock -- jobs/….json` (rejects dynamic without ms)
+- [ ] No hard-coded `hookEnd: 120` / static SCENE in production components
+- [ ] `calculateMetadata` / active cuts drive `durationInFrames`
 
 ---
 
-## Geek-Dark
+## Geek-Dark (`mode: geek-dark`)
 
 ### Meta
 - [ ] `archetype` fits the topic (not forcing code-morph)
 - [ ] `platform` preset applied (safeBottom / safeRight / cardWidth)
-- [ ] `clock: "dynamic"` when narration exists; ms→frame for all beats
 - [ ] `metaphor.type` matches the pain (or justified `none` with filled lower half)
 
 ### Story / dry-goods
@@ -43,11 +49,12 @@
 
 ---
 
-## Warm Editorial
+## Warm Editorial (`mode: editorial-warm`)
 
 ### Meta / content
 - [ ] `layout: "letterbox-card"`; ivory card not stretched to full 1920 height
-- [ ] Single `widgetType`: icon-grid | ui-mockup | flow-step
+- [ ] Single widget via StageWidget: icon-matrix | ui-mockup | flow-step
+- [ ] No required PNG assets (CSS/SVG mascot or `showMascot: false`)
 - [ ] Category + title readable; punchline / insight clear in 3s
 - [ ] Subtitles in lower letterbox; ≠ badge twins
 
