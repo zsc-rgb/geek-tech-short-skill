@@ -37,7 +37,9 @@ Next:
   npm run render:arch   # ArchitectureFlowShort
   npm run render:race   # BenchmarkRaceShort
 
-TTS/Whisper (optional upgrade):
-  edge-tts --voice zh-CN-YunjianNeural --text "..." --write-media public/scene-0.mp3
+TTS/Whisper (optional — voice is configurable):
+  npm run tts:jev -- --voice=xiaoxiao     # female
+  npm run tts:jev -- --off                # silent clock
+  # or: edge-tts --voice zh-CN-XiaoxiaoNeural --text "..." --write-media public/jev/scene-0.mp3
   # then write startMs/endMs back into jobs/*.job.json and re-run: npm run pipeline
 `);

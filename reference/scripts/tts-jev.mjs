@@ -1,12 +1,22 @@
 /**
  * Edge-TTS for JevReleaseShort — writes public/jev/*.mp3 + src/generated/jev-clock.json
  *
- * Usage: node scripts/tts-jev.mjs
+ * Usage:
+ *   node scripts/tts-jev.mjs
+ *   node scripts/tts-jev.mjs --voice=xiaoxiao
+ *   node scripts/tts-jev.mjs --voice=female --rate=+8%
+ *   node scripts/tts-jev.mjs --off
+ *   node scripts/tts-jev.mjs --config=jobs/jev-release.job.json
  */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { execFileSync, spawnSync } from "child_process";
+import {
+  parseTtsArgs,
+  resolveNarrationConfig,
+  listVoiceHelp,
+} from "./voices.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -14,9 +24,9 @@ const publicDir = path.join(root, "public", "jev");
 const generatedDir = path.join(root, "src", "generated");
 
 const FPS = 30;
-const VOICE = "zh-CN-YunjianNeural";
-const RATE = "+12%";
 const PAD_MS = 280;
+/** Silent / off: ~seconds per beat when no TTS */
+const SILENT_BEAT_MS = 4500;
 
 /** Longer release script — one narration line per beat */
 export const JEV_BEATS = [
@@ -60,7 +70,6 @@ try:
   from mutagen.mp3 import MP3
   print(int(MP3(sys.argv[1]).info.length * 1000))
 except Exception:
-  # fallback: rough size estimate ~16kbps edge-tts often ~48-64kbps; prefer ffprobe
   import subprocess, json
   try:
     out = subprocess.check_output([
@@ -75,14 +84,14 @@ except Exception:
   return Number.isFinite(n) && n > 500 ? n : 4000;
 };
 
-const ttsOne = (text, outFile) => {
+const ttsOne = (text, outFile, voice, rate) => {
   const args = [
     "-m",
     "edge_tts",
     "--voice",
-    VOICE,
+    voice,
     "--rate",
-    RATE,
+    rate,
     "--text",
     text,
     "--write-media",
@@ -102,19 +111,65 @@ const ttsOne = (text, outFile) => {
   throw lastErr ?? new Error(`TTS failed: ${outFile}`);
 };
 
+const loadJobConfig = (configPath) => {
+  if (!configPath) return null;
+  const abs = path.isAbsolute(configPath) ? configPath : path.join(root, configPath);
+  if (!fs.existsSync(abs)) {
+    console.warn(`Config not found (${configPath}), using CLI / defaults`);
+    return null;
+  }
+  const job = JSON.parse(fs.readFileSync(abs, "utf8"));
+  return job.config ?? null;
+};
+
+const argv = process.argv.slice(2);
+if (argv.includes("--help") || argv.includes("-h")) {
+  console.log(listVoiceHelp());
+  process.exit(0);
+}
+
+const cli = parseTtsArgs(argv);
+const jobConfig = loadJobConfig(cli.configPath ?? "jobs/jev-release.job.json");
+const { narration, voice, rate, voiceAlias } = resolveNarrationConfig(jobConfig, cli);
+
 fs.mkdirSync(publicDir, { recursive: true });
 fs.mkdirSync(generatedDir, { recursive: true });
 
 const scenes = [];
 let cursorFrame = 0;
 
+console.log(
+  narration === "off"
+    ? `Narration: OFF (silent clock, ~${SILENT_BEAT_MS}ms/beat)`
+    : `Narration: TTS · voice=${voice} (alias=${voiceAlias}) · rate=${rate}`,
+);
+
 for (let i = 0; i < JEV_BEATS.length; i++) {
   const beat = JEV_BEATS[i];
-  const audioRel = `jev/scene-${i}.mp3`;
-  const outFile = path.join(publicDir, `scene-${i}.mp3`);
-  console.log(`TTS [${beat.id}] → ${audioRel}`);
-  ttsOne(beat.narration, outFile);
-  const durMs = mp3DurationMs(outFile) + PAD_MS;
+  let audioRel = "";
+  let durMs = SILENT_BEAT_MS + PAD_MS;
+
+  if (narration === "tts" && voice) {
+    audioRel = `jev/scene-${i}.mp3`;
+    const outFile = path.join(publicDir, `scene-${i}.mp3`);
+    console.log(`TTS [${beat.id}] → ${audioRel}`);
+    ttsOne(beat.narration, outFile, voice, rate);
+    durMs = mp3DurationMs(outFile) + PAD_MS;
+  } else if (narration === "file") {
+    // Expect pre-placed mp3; skip synthesis
+    audioRel = `jev/scene-${i}.mp3`;
+    const outFile = path.join(publicDir, `scene-${i}.mp3`);
+    if (!fs.existsSync(outFile) || fs.statSync(outFile).size < 800) {
+      throw new Error(
+        `narration=file but missing/empty ${audioRel}. Drop mp3s under public/jev/ or use --voice / --off.`,
+      );
+    }
+    console.log(`FILE [${beat.id}] ← ${audioRel}`);
+    durMs = mp3DurationMs(outFile) + PAD_MS;
+  } else {
+    console.log(`SILENT [${beat.id}]`);
+  }
+
   const durationInFrames = Math.max(Math.ceil((durMs / 1000) * FPS), 90);
   scenes.push({
     id: beat.id,
@@ -128,8 +183,10 @@ for (let i = 0; i < JEV_BEATS.length; i++) {
 
 const clock = {
   fps: FPS,
-  voice: VOICE,
-  rate: RATE,
+  narration,
+  voice: voice ?? null,
+  voiceAlias: narration === "tts" ? voiceAlias : null,
+  rate: narration === "tts" ? rate : null,
   totalFrames: cursorFrame,
   scenes,
 };

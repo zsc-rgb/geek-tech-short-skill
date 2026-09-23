@@ -68,4 +68,5 @@
 
 ### Ship
 - [ ] `EditorialVideoConfig` / demos updated
-- [ ] lint + `render:editorial-*`; spot-check mid + end frames
+- [ ] Narration intentional: `tts` + chosen voice **or** `off` / `file` (not accidental Yunjian lock-in)
+- [ ] lint + `render:editorial-*` / `render:jev[:female|:silent]`; spot-check mid + end frames

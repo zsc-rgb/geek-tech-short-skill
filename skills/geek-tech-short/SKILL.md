@@ -24,7 +24,8 @@ Two parallel visual engines share the same skill. **Pick one per video** via `me
 2. **geek-dark** — 3 archetypes + pluggable metaphors + dynamic clock + platform safe areas.
 3. **editorial-warm** — letterbox-card + StageWidget (`icon-matrix` / `ui-mockup` / `flow-step`) + optional CSS mascot (zero PNG deps).
 4. **Dynamic timeline** — production narration ⇒ `clock: "dynamic"` + scene ms; `derive-clock` + `calculateMetadata`.
-5. **Ship path** — v2.1 `job.json` → `reference/` → [CHECKLIST.md](CHECKLIST.md).
+5. **Optional voice** — `config.narration` = `tts` | `off` | `file`; `config.voice` aliases (`yunjian` / `xiaoxiao` / …); not locked to one gender.
+6. **Ship path** — v2.1 `job.json` → `reference/` → [CHECKLIST.md](CHECKLIST.md).
 
 | Doc | Purpose |
 |-----|---------|
@@ -124,7 +125,7 @@ Zero-asset rule: no required PNG/mascot files — `MascotAvatar` is geometric SV
 3. One widget type per composition.
 4. Frame-driven springs only (no CSS transitions / random timers).
 5. Captions sit in the lower letterbox; keep clear of platform UI chrome.
-6. **Center-aligned content** — category/badge row, title, StageWidget, and caption are horizontally centered on the card axis (`textAlign: "center"` + flex `alignItems/justifyContent: "center"`). Titles/punchlines use `\n` for balanced wraps — never leave a single orphan char on the next line. Mascot is a corner decoration only — never add left padding that shifts the stage off-center.
+6. **Center-aligned content** — category/badge row, title, StageWidget, and caption are horizontally centered on the card axis (`textAlign: "center"` + flex `alignItems/justifyContent: "center"`). Header+widget stack is **vertically centered** inside the ivory card. Titles/punchlines use `\n` for balanced wraps — never leave a single orphan char on the next line. Mascot is a corner decoration only — never add left padding that shifts the stage off-center.
 7. No required PNG assets.
 
 ---
@@ -320,12 +321,16 @@ Minimal shape (full reference → [schema.md](schema.md)):
     "width": 1080,
     "height": 1920,
     "fps": 30,
-    "voice": "zh-CN-YunjianNeural",
+    "narration": "tts",
+    "voice": "yunjian",
     "rate": "+28%",
     "paddingBackMs": 100
   }
 }
 ```
+
+**Voice aliases** (see `reference/scripts/voices.mjs`): `yunjian`/`male` · `yunyang` · `xiaoxiao`/`female` · `xiaoyi` · `xiaochen` · or full `zh-CN-…Neural`.  
+**Narration modes:** `tts` | `off`（无配音）| `file`（自备 mp3）。CLI：`npm run tts:jev -- --voice=xiaoxiao` / `--off`。
 
 **v1 compat:** if Agent sees old flat `content.titles` / fixed `SCENE`, migrate to v2 before new features — or map: `refactorEnd` → `resolveEnd`.
 

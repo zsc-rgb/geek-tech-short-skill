@@ -1,6 +1,8 @@
 {
   "fps": 30,
+  "narration": "tts",
   "voice": "zh-CN-YunjianNeural",
+  "voiceAlias": "yunjian",
   "rate": "+12%",
   "totalFrames": 1638,
   "scenes": [

@@ -56,6 +56,7 @@
 - widget.type：【icon-matrix | ui-mockup | flow-step】（icon-grid 为别名）
 - theme：warm-ivory
 - clock：有口播 → dynamic + startMs/endMs；无口播预览可用 static
+- 配音（可选）：config.narration = tts | off | file；config.voice = yunjian|xiaoxiao|female|… 或完整 zh-CN-…Neural；CLI 可覆盖（`--voice=xiaoxiao` / `--off`）
 
 ### 文案
 - category（眉题，如「网络基础」）：【】

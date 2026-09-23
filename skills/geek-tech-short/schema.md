@@ -123,10 +123,33 @@ type Config = {
   width: 1080;
   height: 1920;
   fps: 30;
+  /**
+   * Narration mode (optional; default `tts` when shipping with voice):
+   * - `tts`  — Edge-TTS synthesize (needs Python `edge-tts`)
+   * - `off`  — silent video; clock uses fixed beat lengths; no Audio track
+   * - `file` — use pre-dropped `public/jev/scene-N.mp3` (or scene assets); skip synthesize
+   */
+  narration?: "tts" | "off" | "file";
+  /**
+   * Voice alias or full Azure Neural id. Aliases:
+   * yunjian|male · yunyang · xiaoxiao|female · xiaoyi · xiaochen
+   * Default: yunjian (男讲解). Female default alias: xiaoxiao.
+   */
   voice?: string;
+  /** Edge-TTS rate, e.g. "+12%" | "+0%" | "-5%" */
   rate?: string;
   paddingBackMs?: number;
 };
+```
+
+CLI overrides (Jev):
+
+```bash
+npm run tts:jev -- --voice=xiaoxiao
+npm run tts:jev -- --off
+npm run render:jev:female
+npm run render:jev:silent
+node scripts/tts-jev.mjs --help
 ```
 
 ## Samples
@@ -139,6 +162,7 @@ type Config = {
 | `jobs/editorial-icons.job.json` | editorial-warm · icon-matrix |
 | `jobs/editorial-table.job.json` | editorial-warm · ui-mockup |
 | `jobs/editorial-flow.job.json` | editorial-warm · flow-step |
+| `jobs/jev-release.job.json` | editorial-warm · voice/narration config for TTS |
 | Composition `EditorialFromJobShort` | `npm run clock -- jobs/editorial-*.job.json` then render |
 | Jev TTS short | editorial-warm (`JevReleaseShort` + `jev-clock.json`) |
 

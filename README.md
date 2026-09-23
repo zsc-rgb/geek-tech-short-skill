@@ -27,9 +27,9 @@
 | **Geek-Dark 三形态** | `code-refactor` · `architecture-flow` · `benchmark-race` |
 | **Editorial 三组件** | `icon-grid` · `ui-mockup` · `flow-step` + 可选吉祥物 |
 | **对比隐喻可装配** | Io / 水箱 / 索引树 / 线程池 / 节点图 / 柱状赛道（Geek-Dark） |
-| **音画能对齐** | Geek-Dark：`dynamic` 时钟；Editorial：帧区间字幕 |
+| **音画能对齐** | Geek-Dark：`dynamic` 时钟；Editorial：帧区间字幕；配音可选男/女/关 |
 | **多平台不挡 UI** | 抖音 / 视频号 / Shorts / B 站安全区预设 |
-| **可跑参考实现** | `reference/`：Geek + Editorial + `JevReleaseShort`（含 Edge-TTS 样片） |
+| **可跑参考实现** | `reference/`：Geek + Editorial + `JevReleaseShort`（Edge-TTS，voice 可配） |
 | **演示成片** | 仓库 `demos/jev-release.mp4`（Warm Editorial 发布样例，约 55s） |
 
 > **默认不是只有这一种画面。** Skill 是双模：硬核重构/跑分用 **Geek-Dark**；知识库/产品发布用 **Warm Editorial**（本 Jev 片属于后者）。Agent 会按选题选引擎，不会强制 letterbox 象牙卡。
@@ -106,7 +106,10 @@ npm run render:editorial-table | render:editorial-icons | render:editorial-flow
 
 ```bash
 cd reference
-npm run render:jev    # 会先跑 Edge-TTS 再渲染
+npm run render:jev          # Edge-TTS（默认男声 yunjian）再渲染
+npm run render:jev:female   # 女声 Xiaoxiao
+npm run render:jev:silent   # 无配音预览
+npm run tts:jev -- --help   # 查看 voice 别名
 ```
 
 体积约数 MB，适合放在 git 里给访客预览。更大成片建议改用 GitHub/Gitee **Releases** 附件，避免撑爆 clone。

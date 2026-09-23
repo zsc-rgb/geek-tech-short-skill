@@ -42,79 +42,90 @@ export const EditorialCard: React.FC<{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
           boxSizing: "border-box",
-          padding: "36px 48px 28px",
+          padding: "40px 48px 56px",
         }}
       >
+        {/* Header + stage as one vertically centered stack */}
         <div
           style={{
             position: "relative",
             zIndex: 2,
-            marginBottom: 18,
             width: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            justifyContent: "center",
+            gap: 28,
             textAlign: "center",
           }}
         >
           <div
             style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                gap: 10,
+                marginBottom: 14,
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                  background: EDITORIAL_THEME.accentBlue,
+                  padding: "5px 14px",
+                  borderRadius: 999,
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {category}
+              </span>
+              {badge ? (
+                <span style={{ fontSize: 15, color: EDITORIAL_THEME.textMuted }}>{badge}</span>
+              ) : null}
+            </div>
+            <h1
+              style={{
+                margin: 0,
+                fontSize: 44,
+                lineHeight: 1.28,
+                fontWeight: 800,
+                color: EDITORIAL_THEME.textTitle,
+                fontFamily:
+                  '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
+                whiteSpace: "pre-line",
+                textAlign: "center",
+                maxWidth: "100%",
+              }}
+            >
+              {title}
+            </h1>
+          </div>
+
+          <div
+            style={{
+              width: "100%",
+              position: "relative",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              flexWrap: "wrap",
-              gap: 10,
-              marginBottom: 14,
             }}
           >
-            <span
-              style={{
-                fontSize: 16,
-                fontWeight: 700,
-                color: "#FFFFFF",
-                background: EDITORIAL_THEME.accentBlue,
-                padding: "5px 14px",
-                borderRadius: 999,
-                letterSpacing: "0.02em",
-              }}
-            >
-              {category}
-            </span>
-            {badge ? (
-              <span style={{ fontSize: 15, color: EDITORIAL_THEME.textMuted }}>{badge}</span>
-            ) : null}
+            {children}
           </div>
-          <h1
-            style={{
-              margin: 0,
-              fontSize: 44,
-              lineHeight: 1.28,
-              fontWeight: 800,
-              color: EDITORIAL_THEME.textTitle,
-              fontFamily:
-                '"PingFang SC", "Noto Sans SC", Inter, system-ui, sans-serif',
-              whiteSpace: "pre-line",
-              textAlign: "center",
-              maxWidth: "100%",
-            }}
-          >
-            {title}
-          </h1>
-        </div>
-
-        <div
-          style={{
-            flex: 1,
-            minHeight: 0,
-            width: "100%",
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {children}
         </div>
 
         {/* Corner decoration — must not offset centered stage content */}

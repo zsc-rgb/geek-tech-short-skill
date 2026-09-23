@@ -29,8 +29,19 @@ npm run render:editorial-flow    # FlowStep A→B punchline
 npm run render:editorial-job     # job.json → EditorialFromJobShort (default icons)
 npm run render:editorial-job:table
 npm run render:editorial-job:flow
-npm run render:jev               # TTS + LangChain × Jev release (~55s)
-npm run tts:jev                  # only regenerate Edge-TTS + jev-clock.json
+npm run render:jev               # TTS（默认 voice=yunjian，见 jobs/jev-release.job.json）
+npm run render:jev:female        # 女声 Xiaoxiao
+npm run render:jev:silent        # 无配音预览
+npm run tts:jev                  # 只重生 Edge-TTS + jev-clock.json
+npm run tts:jev:female           # 女声 TTS only
+npm run tts:jev:help             # 列出 voice 别名
+```
+
+配音在 `jobs/jev-release.job.json` 的 `config.narration` / `config.voice` / `config.rate`，也可用 CLI 覆盖：
+
+```bash
+node scripts/tts-jev.mjs --voice=xiaoyi --rate=+8%
+node scripts/tts-jev.mjs --off
 ```
 
 Demo mp4 (committed for preview on Gitee/GitHub):
@@ -41,8 +52,10 @@ Demo mp4 (committed for preview on Gitee/GitHub):
 
 | Path | Role |
 |------|------|
-| `jobs/*.job.json` | Geek-Dark v2 job samples |
+| `jobs/*.job.json` | Geek-Dark / Editorial / Jev voice samples |
 | `scripts/derive-clock.mjs` | `startMs/endMs` → frame cuts |
+| `scripts/voices.mjs` | Edge-TTS voice aliases + CLI parse |
+| `scripts/tts-jev.mjs` | Jev TTS / silent / file clock |
 | `src/metaphors/` | Io / WaterTank / BTree / Threads / NodeGraph / BarRace |
 | `src/archetypes/` | Geek-Dark stage shells |
 | `src/compositions/` | Geek-Dark compositions |

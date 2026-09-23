@@ -13,9 +13,11 @@
 3. **Geek 三形态** — 重构避坑 / 架构顿悟 / 跑分对决。
 4. **Editorial 三组件** — IconGrid 速查墙 · UiMockup 表格产品感 · FlowStep 认知升级。
 5. **对比隐喻可装配** — IO、水箱、索引树、线程池、节点图、柱状赛道（Geek-Dark）。
-6. **音画可对齐** — Geek：TTS+Whisper 动态时钟；Editorial：帧区间字幕。
+6. **音画可对齐** — Geek：TTS+Whisper 动态时钟；Editorial：帧区间字幕；配音可选（男/女/关/`file`）。
 7. **干货底线** — 痛点/洞察钩子 + 可行动 takeaway；CTA 与字幕不双胞胎。
 8. **交付路径** — `job.json` / `EditorialVideoConfig` → `reference/` → CHECKLIST；`PROMPT.md` 填空即用。
+
+配音示例：`npm run render:jev:female` · `npm run render:jev:silent` · `config.voice=xiaoxiao`。
 
 ## 怎么开始
 

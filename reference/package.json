@@ -30,8 +30,12 @@
     "render:editorial-job": "npm run clock -- jobs/editorial-icons.job.json && remotion render EditorialFromJobShort out/editorial-from-job.mp4",
     "render:editorial-job:table": "npm run clock -- jobs/editorial-table.job.json && remotion render EditorialFromJobShort out/editorial-from-job.mp4",
     "render:editorial-job:flow": "npm run clock -- jobs/editorial-flow.job.json && remotion render EditorialFromJobShort out/editorial-from-job.mp4",
-    "render:jev": "node scripts/tts-jev.mjs && remotion render JevReleaseShort out/jev-release.mp4",
-    "tts:jev": "node scripts/tts-jev.mjs",
+    "render:jev": "node scripts/tts-jev.mjs --config=jobs/jev-release.job.json && remotion render JevReleaseShort out/jev-release.mp4",
+    "render:jev:female": "node scripts/tts-jev.mjs --config=jobs/jev-release.job.json --voice=xiaoxiao && remotion render JevReleaseShort out/jev-release.mp4",
+    "render:jev:silent": "node scripts/tts-jev.mjs --off && remotion render JevReleaseShort out/jev-release-silent.mp4",
+    "tts:jev": "node scripts/tts-jev.mjs --config=jobs/jev-release.job.json",
+    "tts:jev:female": "node scripts/tts-jev.mjs --config=jobs/jev-release.job.json --voice=xiaoxiao",
+    "tts:jev:help": "node scripts/tts-jev.mjs --help",
     "lint": "tsc --noEmit"
   }
 }

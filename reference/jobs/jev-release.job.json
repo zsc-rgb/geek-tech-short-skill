@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "topic": "LangChain × Jev System One",
+    "mode": "editorial-warm",
+    "widget": { "type": "flow-step" },
+    "platform": "douyin",
+    "clock": "dynamic"
+  },
+  "content": {
+    "header": {
+      "category": "「是什么」",
+      "title": "Jev：不做聊天\n只做结构化判定"
+    },
+    "badge": "TypeSafe AI"
+  },
+  "scenes": [
+    { "beat": "hook", "text": "（由 tts-jev 按口播填充时钟）" },
+    { "beat": "analyze", "text": "what / types / usecase" },
+    { "beat": "cta", "text": "结构化判定交给 Jev" }
+  ],
+  "config": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "narration": "tts",
+    "voice": "yunjian",
+    "rate": "+12%",
+    "paddingBackMs": 280
+  }
+}

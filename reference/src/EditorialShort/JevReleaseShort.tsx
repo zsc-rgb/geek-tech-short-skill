@@ -13,6 +13,9 @@ import clockFallback from "../generated/jev-clock.json";
 type JevClock = {
   fps: number;
   totalFrames: number;
+  /** tts | off | file — when off, scenes have empty audio */
+  narration?: "tts" | "off" | "file" | null;
+  voice?: string | null;
   scenes: Array<{
     id: string;
     audio: string;
