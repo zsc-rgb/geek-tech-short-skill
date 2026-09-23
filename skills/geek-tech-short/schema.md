@@ -1,4 +1,11 @@
-# job.json schema (v2)
+# Config schema (v2 · dual engine)
+
+- **Geek-Dark** → `job.json` below (`meta.archetype` …).
+- **Warm Editorial** → `EditorialVideoConfig` at the bottom (not the same file format).
+
+---
+
+# job.json schema (Geek-Dark)
 
 ## Top level
 
@@ -116,3 +123,39 @@ type Config = {
 | `content.cta.prompt` | `content.cta.badge` |
 | `SCENE.refactorEnd` | `resolveEnd` |
 | fixed frames only | `meta.clock` + `scenes[].startMs/endMs` |
+
+---
+
+# EditorialVideoConfig (Warm Editorial)
+
+Type source of truth: `reference/src/EditorialShort/types.ts`.
+
+```ts
+type EditorialWidgetType = "icon-grid" | "ui-mockup" | "flow-step";
+
+type EditorialVideoConfig = {
+  theme: "warm-ivory" | "paper-white";
+  layout: "letterbox-card";
+  header: { category: string; title: string };
+  widgetType: EditorialWidgetType;
+  widgetData: IconGridItem[] | FlowStep | TableMockupData;
+  subtitles: Array<{ startFrame: number; endFrame: number; text: string }>;
+  badge?: string;
+  showMascot?: boolean;
+  durationInFrames?: number;
+  fps?: number;
+};
+
+type IconGridItem = { id: string; label: string; color: string; glyph: string };
+type FlowStep = { from: string; to: string; punchline: string };
+type TableMockupData = {
+  title: string;
+  subtitle?: string;
+  columns: string[];
+  rows: string[][];
+  highlight?: { row: number; col: number };
+  actionLabel?: string;
+};
+```
+
+Samples: `reference/src/EditorialShort/demos.ts` → compositions `EditorialTableShort` / `EditorialIconGridShort` / `EditorialFlowShort`.

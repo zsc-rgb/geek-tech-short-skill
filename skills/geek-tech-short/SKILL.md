@@ -1,62 +1,70 @@
 ---
 name: geek-tech-short
 description: >-
-  Industrial Remotion engine for vertical geek tech shorts (1080×1920): cold-black
-  look, 4-beat arc, pluggable archetypes (code-refactor | architecture-flow |
-  benchmark-race), metaphor widgets, platform safe-area presets, and static or
-  TTS/Whisper-driven dynamic clocks. Use for Douyin/视频号/Shorts programmer videos,
-  性能优化/架构/跑分/避坑, or when the user mentions geek-tech-short / 极客短视频母机.
+  Dual-engine Remotion skill for vertical tech shorts (1080×1920): Geek-Dark
+  (cold-black, 4-beat, code-refactor | architecture-flow | benchmark-race + metaphors)
+  and Warm Editorial / Notion Canvas (letterbox black + ivory card, IconGrid |
+  UiMockup | FlowStep + mascot). Use for Douyin/视频号/Shorts programmer videos,
+  知识库/产品科普, 性能优化/架构/跑分/避坑, or geek-tech-short / 极客短视频 /
+  暖调社论 / Notion Canvas.
 ---
 
-# Geek Tech Short — Industrial Engine
+# Geek Tech Short — Dual Engine
 
-Cold-black geek shorts that stay senior — **not** a single “红球堵车→绿代码” template.
+Two parallel visual engines share the same skill. **Pick one per video** — never mix themes in a single composition.
+
+| Engine | Feel | Best for |
+|--------|------|----------|
+| **Geek-Dark** | Cold black `#070A10`, danger/success accents, full-bleed stage | 重构避坑 · 架构原理 · 跑分对决 · 硬核程序员频道 |
+| **Warm Editorial** | Letterbox black + ivory card `#F7F4EB`, Notion-like calm | 知识库 · 产品/AI 科普 · 协议速查 · 低压迫感学习感 |
 
 ## What callers get
 
-After install, the Agent follows this engine instead of inventing a one-off Remotion layout:
-
-1. **Channel-consistent look** — cold black, no neon clutter / camera clipping / empty Hook void / hard cuts.
-2. **Three archetypes** — code-refactor · architecture-flow · benchmark-race (not only code morph).
-3. **Pluggable metaphors** — IO / water-tank / btree / threads / graph / bar-race so pain is visible in 3s.
-4. **Honest A/V clock** — `dynamic` ms→frame with TTS/Whisper; static frames only for silent UI preview.
-5. **Platform safe areas** — Douyin / 视频号 / Shorts / Bilibili presets.
-6. **Dry-goods floor** — pain hook + ≥1 production gotcha + 3 principles; CTA ≠ caption twins.
-7. **Clear ship path** — v2 `job.json` → components → [CHECKLIST.md](CHECKLIST.md).
-
-Human-facing pitch (Chinese): see repo root `README.md` on Gitee.
+1. **Engine choice first** — Geek-Dark vs Warm Editorial.
+2. **Geek-Dark** — 3 archetypes + pluggable metaphors + dynamic clock + platform safe areas.
+3. **Warm Editorial** — letterbox-card + IconGrid / UiMockup / FlowStep + optional mascot.
+4. **Dry-goods floor** — pain/insight hook + actionable takeaway; CTA ≠ caption twins.
+5. **Ship path** — config/`job.json` → `reference/` → [CHECKLIST.md](CHECKLIST.md).
 
 | Doc | Purpose |
 |-----|---------|
-| [PROMPT.md](PROMPT.md) | Copy-paste production prompts |
+| [PROMPT.md](PROMPT.md) | Copy-paste prompts (both engines) |
 | [CHECKLIST.md](CHECKLIST.md) | Pre-publish QA |
-| [examples.md](examples.md) | Topic packs by archetype |
-| [schema.md](schema.md) | Full `job.json` reference |
-| [metaphors.md](metaphors.md) | Metaphor widget library |
+| [examples.md](examples.md) | Topic packs (Geek-Dark) |
+| [schema.md](schema.md) | `job.json` + Editorial config |
+| [metaphors.md](metaphors.md) | Geek-Dark metaphor widgets |
 
-Install companions as needed: `remotion-dev/skills`, frame-driven `@shikijs/magic-move`.
-
-## Reference implementation (required reading)
-
-This skill ships a **renderable** Remotion mini-project:
-
-`reference/` (in the skill repo) → three compositions + metaphor widgets + dynamic clock scripts.
+## Reference implementation
 
 ```bash
 cd reference
 npm i
-npm run clock -- jobs/code-refactor.job.json   # or architecture-flow / benchmark-race
+npm run clock -- jobs/code-refactor.job.json   # Geek-Dark only
 npm run dev
-# npm run render:code | render:arch | render:race
+# Geek-Dark:  npm run render:code | render:arch | render:race
+# Editorial:  npm run render:editorial-table | render:editorial-icons | render:editorial-flow
 ```
 
-| Composition | Archetype | Job |
-|-------------|-----------|-----|
-| `CodeRefactorShort` | code-refactor | `jobs/code-refactor.job.json` |
-| `ArchitectureFlowShort` | architecture-flow | `jobs/architecture-flow.job.json` |
-| `BenchmarkRaceShort` | benchmark-race | `jobs/benchmark-race.job.json` |
+| Composition | Engine | Source |
+|-------------|--------|--------|
+| `CodeRefactorShort` | Geek-Dark | `jobs/code-refactor.job.json` |
+| `ArchitectureFlowShort` | Geek-Dark | `jobs/architecture-flow.job.json` |
+| `BenchmarkRaceShort` | Geek-Dark | `jobs/benchmark-race.job.json` |
+| `EditorialTableShort` | Warm Editorial | `DEMO_EDITORIAL_TABLE` (ui-mockup) |
+| `EditorialIconGridShort` | Warm Editorial | `DEMO_EDITORIAL_ICONS` (icon-grid) |
+| `EditorialFlowShort` | Warm Editorial | `DEMO_EDITORIAL_FLOW` (flow-step) |
 
-Agent rule: **copy/adapt from `reference/src`** instead of inventing neon layouts from scratch. Metaphor switch = `MetaphorWidget` + `job.content.body.metaphor.type`. Clock = `scripts/derive-clock.mjs` (never hard-code production `hookEnd: 120` when narration exists).
+Agent rule: **copy/adapt from `reference/src`**. Geek-Dark metaphors via `MetaphorWidget`. Editorial via `reference/src/EditorialShort/`.
+
+---
+
+## Engine picker (Agent must ask or infer)
+
+| Signal in the brief | Engine |
+|---------------------|--------|
+| 重构 / N+1 / 跑分 / 冷黑 / IDE / 红绿对比 | **Geek-Dark** |
+| 知识库 / Notion / 协议图标墙 / SaaS 表格 / 暖纸 / 吉祥物 | **Warm Editorial** |
+| Unclear | Ask once; default Geek-Dark for hardcore eng topics |
 
 ---
 
@@ -64,20 +72,60 @@ Agent rule: **copy/adapt from `reference/src`** instead of inventing neon layout
 
 ```
 Task Progress:
-- [ ] 1. Pick archetype + platform + metaphor (or “none” for pure diagram)
-- [ ] 2. Lock: pain metric + contrast story + ≥1 production gotcha
-- [ ] 3. Write modular job.json (meta / content / scenes / clock)
-- [ ] 4. Resolve SCENE cuts: static preview OR dynamic timestamps
-- [ ] 5. Mount archetype shell + metaphor widget + platform zones
-- [ ] 6. Soft handoffs + climax Ding aligned to clock
-- [ ] 7. precompile (if code) → lint → render → CHECKLIST.md
+- [ ] 1. Pick ENGINE (geek-dark | warm-editorial)
+- [ ] 2a. Geek-Dark → archetype + platform + metaphor + gotcha
+- [ ] 2b. Editorial → widgetType (icon-grid | ui-mockup | flow-step) + header + punchline
+- [ ] 3. Write job.json (Geek) OR EditorialVideoConfig (Editorial)
+- [ ] 4. Mount from reference/src — do not invent neon / purple gradients
+- [ ] 5. Soft motion only (spring / interpolate); no global camera scale
+- [ ] 6. lint → render → CHECKLIST.md
 ```
 
-Without a gotcha, the video stays “入门八股” — reject and ask for one.
+Without a Geek-Dark gotcha, the video stays “入门八股” — reject and ask for one.
 
 ---
 
-## Non-negotiables (all archetypes)
+## Warm Editorial / Notion Canvas
+
+**Layout:** full-frame black stage (`#000`) + centered ivory card (~1000×900, radius 32). Upper/lower letterbox stays black — that *is* the vertical-video composition, not empty void.
+
+**Theme** (`reference/src/EditorialShort/theme.ts`):
+
+```ts
+EDITORIAL_THEME = {
+  stageBg: "#000000",
+  cardBg: "#F7F4EB",
+  textTitle: "#1C1917",
+  textMuted: "#78716C",
+  accentBlue: "#2563EB",
+  accentOrange: "#EA580C",
+  accentGreen: "#16A34A",
+}
+```
+
+**Widgets** (pick one per video):
+
+| `widgetType` | Component | Use when |
+|--------------|-----------|----------|
+| `icon-grid` | `IconGridWidget` | 协议/工具/概念速查墙（彩色圆标逐个 pop） |
+| `ui-mockup` | `UiMockupWidget` | SaaS/Notion 表格式产品界面 + 光标/高亮 |
+| `flow-step` | `FlowStepWidget` | A→B 认知升级一句 punchline |
+
+**Chrome:** category eyebrow + bold title on card; dark caption pill under card; optional `MascotAvatar` + badge. No cold neon, no full-bleed code IDE.
+
+**Config type:** `EditorialVideoConfig` in `reference/src/EditorialShort/types.ts`.
+
+### Editorial non-negotiables
+
+1. Letterbox-card only — do not stretch the ivory card to full 1920 height.
+2. Warm paper palette — no Geek-Dark danger/success neon on Editorial shots.
+3. One widget type per composition.
+4. Frame-driven springs only (no CSS transitions / random timers).
+5. Captions sit in the lower letterbox; keep clear of platform UI chrome.
+
+---
+
+## Geek-Dark non-negotiables
 
 1. **Cold-black geek** — `#070A10`; accents only danger `#FF2A6D` / success `#05FFA1` / cyan `#38BDF8`.
 2. **No global camera scale** — never stage-wide `scale`/`translate` that clips cards.
@@ -90,7 +138,7 @@ Without a gotcha, the video stays “入门八股” — reject and ask for one.
 
 ---
 
-## Three archetypes
+## Three Geek-Dark archetypes
 
 Set `meta.archetype`. Agent mounts **only** that shell’s components.
 
@@ -130,7 +178,7 @@ Composition reads `meta.platform` → `CARD_W = preset.cardWidth`, captions `bot
 
 ---
 
-## Theme (shared)
+## Theme (Geek-Dark)
 
 ```ts
 export const THEME = {
@@ -202,7 +250,7 @@ Wire Remotion `calculateMetadata` to set `durationInFrames` from `end` (+ small 
 
 ---
 
-## Metaphor library (decoupled widgets)
+## Metaphor library (Geek-Dark)
 
 `content.body.metaphor.type` selects a widget — **not** always IoFlow.
 
@@ -220,7 +268,7 @@ Standby → active → resolved color story: muted → danger → success. Param
 
 ---
 
-## Modular `job.json` (v2)
+## Modular `job.json` (v2 · Geek-Dark)
 
 Minimal shape (full reference → [schema.md](schema.md)):
 
@@ -279,7 +327,9 @@ Minimal shape (full reference → [schema.md](schema.md)):
 
 ---
 
-## Composition tree (pluggable)
+## Composition tree
+
+### Geek-Dark
 
 ```
 Root
@@ -291,16 +341,28 @@ Root
    │    ├─ architecture-flow → SvgNodeGraph + TokenParticles
    │    └─ benchmark-race → TerminalLogs + BarChartRace
    ├─ CtaBoard
-   ├─ Captions                // platform.safeBottom
-   ├─ Narration (Sequence by startMs)
-   └─ SoundEffects            // keyed off derived SCENE + climax cue
+   ├─ Captions
+   ├─ Narration
+   └─ SoundEffects
+```
+
+### Warm Editorial
+
+```
+Root
+└─ EditorialShort
+   └─ EditorialCard (letterbox stage + ivory card)
+        ├─ header (category + title)
+        ├─ widget: IconGrid | UiMockup | FlowStep
+        ├─ MascotAvatar + badge (optional)
+        └─ caption pill (lower letterbox)
 ```
 
 Animate per-element `top` / `opacity` / local `scale` only.
 
 ---
 
-## Archetype-specific notes
+## Archetype-specific notes (Geek-Dark)
 
 ### code-refactor
 - Mono ≈32px; single-line assignments; `(v1,v2)->v1`.
@@ -319,7 +381,7 @@ Animate per-element `top` / `opacity` / local `scale` only.
 
 ---
 
-## Motion / audio (clock-relative)
+## Motion / audio (clock-relative · Geek-Dark)
 
 | Moment | Motion | Audio |
 |--------|--------|-------|
@@ -334,21 +396,22 @@ SFX: `public/sfx/{alarm,woosh,keyboard,ping}.wav`.
 
 ## Ship
 
-1. Prefer starting from skill-repo `reference/` (three archetype demos).
-2. Fill v2 `job.json` (`archetype` + `platform` + `metaphor` + gotcha).
-3. Pipeline: edit `scenes[].startMs/endMs` → `node scripts/derive-clock.mjs jobs/….json` → `clock: "dynamic"`.
-4. Optional TTS/Whisper: see `reference/scripts/pipeline.mjs` comments, then re-derive clock.
-5. `npm run lint` / `tsc` → `npx remotion render <Id> out/video.mp4`.
-6. [CHECKLIST.md](CHECKLIST.md) with **that** platform’s UI overlay in mind.
+1. Pick engine; start from skill-repo `reference/`.
+2. Geek-Dark: fill v2 `job.json` → `derive-clock.mjs` when narration exists.
+3. Editorial: edit `EditorialShort/demos.ts` (or pass `config` props) → matching Composition id.
+4. `npm run lint` / `tsc` → `npx remotion render <Id> out/video.mp4`.
+5. [CHECKLIST.md](CHECKLIST.md) for that engine + platform UI overlay.
 
 ---
 
 ## Anti-patterns
 
+- Mixing Geek-Dark neon with Editorial ivory in one shot
 - Forcing every topic into code-morph + IoFlow
-- Shipping with `clock: "static"` while narration exists (音画错位)
+- Stretching Editorial card to full 1920 height
+- Shipping Geek-Dark with `clock: "static"` while narration exists
 - Hard-coded `hookEnd: 120` in production components
-- Global camera scale / neon clutter / empty Hook lower half
+- Global camera scale / neon clutter / empty Hook lower half (Geek-Dark)
 - Caption twin of CTA badge
 - Ignoring `PLATFORMS` when targeting 视频号 / Shorts
 - Hard-coded copy scattered in TSX

@@ -1,28 +1,35 @@
 # geek-tech-short
 
-> Cursor / Claude Code / Codex **Agent Skill** · Remotion 竖屏极客技术短视频**工业化母机**  
-> 冷黑极客风 · 三形态 Archetype · 可插拔隐喻 · 动态音画时钟 · 多平台安全区
+> Cursor / Claude Code / Codex **Agent Skill** · Remotion 竖屏技术短视频**双模工业化母机**  
+> **Geek-Dark** 冷黑极客 · **Warm Editorial** 暖纸社论（Notion Canvas）  
+> 三形态 Archetype · 可插拔隐喻 · Letterbox 卡片 · 动态音画时钟 · 多平台安全区
 
-从「单条代码变形爆款模板」升级为可承接 **重构 / 架构原理 / 跑分对决** 的通用生产力引擎。
+从「单条代码变形爆款模板」升级为可承接 **重构 / 架构 / 跑分** 与 **知识库 / 产品科普** 的通用生产力引擎。
+
+---
+
+## 双模一眼懂
+
+| 引擎 | 视觉 | 适合 |
+|------|------|------|
+| **Geek-Dark** | 冷黑 `#070A10` + 红/绿强调，全屏舞台 | 重构避坑 · 架构原理 · 跑分对决 |
+| **Warm Editorial** | 黑边 Letterbox + 象牙卡片 `#F7F4EB` | 协议速查 · SaaS 表格 · A→B 认知升级 |
+
+一条视频只选一个引擎，不要混色板。
 
 ---
 
 ## 调用后你能得到什么？
 
-装上这份 Skill 后，Agent 不再「随便做条 Remotion 视频」，而是按同一套工业规范出片。你实际拿到的是：
-
 | 收益 | 具体效果 |
 |------|----------|
-| **频道级统一视觉** | 冷黑极客风（`#070A10` + 红/绿强调），避开霓虹土味、全局运镜穿模、首屏下半死黑、硬切跳帧；连续发片也像同一套产品 |
-| **三种内容形态可切换** | `code-refactor` 重构避坑 · `architecture-flow` 原理顿悟 · `benchmark-race` 跑分对决 —— 不必每条都是「坏代码→绿代码」 |
-| **对比隐喻可装配** | Io 拥堵 / 内存水箱 / 索引树 / 线程池 / 节点图 / 柱状赛道；观众 3 秒看懂痛点，不只听口播 |
-| **音画能对齐** | 有 TTS 用 `dynamic` 时钟（`startMs/endMs`→帧），Ding/变绿跟口播走；减少「话没说完画面已变绿」 |
-| **多平台不挡 UI** | 抖音 / 视频号 / Shorts / B 站安全区预设；改 `platform` 即可分发 |
-| **干货有底线** | 强制：痛点钩子 + ≥1 条线上避坑 + 三原则 CTA，且按钮与字幕不双胞胎 |
-| **交付路径清楚** | `job.json` v2 → **reference 可渲染工程** → `CHECKLIST` 出片；`PROMPT.md` 填空即可开工 |
-| **可跑参考实现** | 仓库内 `reference/`：三形态 Composition + 隐喻组件 + `derive-clock` 动态时钟脚本 |
-
-**一句话：** 更快做出能发的专业向竖屏技术片，而不是偶然撞出一条好看的。
+| **频道级统一视觉** | 两套可复用视觉系统；避开霓虹土味、全局运镜穿模、硬切跳帧 |
+| **Geek-Dark 三形态** | `code-refactor` · `architecture-flow` · `benchmark-race` |
+| **Editorial 三组件** | `icon-grid` · `ui-mockup` · `flow-step` + 可选吉祥物 |
+| **对比隐喻可装配** | Io / 水箱 / 索引树 / 线程池 / 节点图 / 柱状赛道（Geek-Dark） |
+| **音画能对齐** | Geek-Dark：`dynamic` 时钟；Editorial：帧区间字幕 |
+| **多平台不挡 UI** | 抖音 / 视频号 / Shorts / B 站安全区预设 |
+| **可跑参考实现** | `reference/`：6 条 Composition（3 Geek + 3 Editorial） |
 
 ---
 
@@ -37,20 +44,12 @@ npx skills add https://github.com/zsc-rgb/geek-tech-short-skill.git -a cursor -y
 npx skills add https://gitee.com/CodingKeep/geek-tech-short-skill.git -a cursor -y
 ```
 
-全局 / 仅此 skill：
-
-```bash
-npx skills add zsc-rgb/geek-tech-short-skill -a cursor -g -y
-npx skills add zsc-rgb/geek-tech-short-skill --skill geek-tech-short -a cursor -y
-```
-
 手动：把 `skills/geek-tech-short/` 拷到项目 `.cursor/skills/` 或 `~/.cursor/skills/`。
 
 验证：新开 Agent 对话，发送：
 
-> 按 geek-tech-short 做一条抖音技术短视频
-
-或直接粘贴 [`PROMPT.md`](skills/geek-tech-short/PROMPT.md) 里的主提示词。
+> 按 geek-tech-short 做一条抖音技术短视频  
+> 或：按 Warm Editorial 做一条知识库竖屏短视频
 
 ---
 
@@ -58,22 +57,22 @@ npx skills add zsc-rgb/geek-tech-short-skill --skill geek-tech-short -a cursor -
 
 | 能力 | 说明 |
 |------|------|
-| **3 Archetypes** | `code-refactor` · `architecture-flow` · `benchmark-race` |
+| **Dual engines** | `geek-dark` · `warm-editorial` |
+| **3 Archetypes** | code-refactor · architecture-flow · benchmark-race |
+| **3 Editorial widgets** | icon-grid · ui-mockup · flow-step |
 | **Metaphor widgets** | IoFlow / WaterTank / BTree / ThreadWorkers / NodeGraph / BarRace |
-| **Clock** | `static` 预览 vs `dynamic`（TTS+Whisper `startMs/endMs` → frame） |
+| **Clock** | Geek：`static` vs `dynamic`；Editorial：字幕 `startFrame/endFrame` |
 | **Platforms** | douyin / videoAccount / youtubeShorts / bilibili |
-| **Non-negotiables** | 禁霓虹土味、禁全局运镜穿模、禁首屏死黑、禁硬切、禁 CTA 双胞胎 |
 
 ---
 
 ## 仓库结构
 
 ```
-skills/geek-tech-short/   # Agent Skill 文档
-reference/                # 可渲染 Remotion 参考工程（三形态 + 隐喻 + 时钟）
-  jobs/*.job.json
-  scripts/derive-clock.mjs
-  scripts/pipeline.mjs
+skills/geek-tech-short/   # Agent Skill 文档（双模）
+reference/                # 可渲染 Remotion 参考工程
+  jobs/*.job.json         # Geek-Dark 样例
+  src/EditorialShort/     # Warm Editorial 组件 + demos
   src/metaphors|archetypes|compositions/
 ```
 
@@ -84,7 +83,10 @@ cd reference
 npm i
 npm run clock -- jobs/code-refactor.job.json
 npm run dev
-# npm run render:code | render:arch | render:race
+# Geek-Dark
+npm run render:code | render:arch | render:race
+# Warm Editorial
+npm run render:editorial-table | render:editorial-icons | render:editorial-flow
 ```
 
 详见 [`reference/README.md`](reference/README.md)。
@@ -93,11 +95,12 @@ npm run dev
 
 ## 快速开始
 
-1. 选 `archetype` + `platform` + `metaphor.type`
-2. 填 v2 `job.json`（见 [`schema.md`](skills/geek-tech-short/schema.md)）
-3. 有口播 → `clock: "dynamic"`，禁止写死 `hookEnd: 120` 出片
-4. `calculateMetadata` 用最后一幕 `endMs` 定片长
-5. 对照 [`CHECKLIST.md`](skills/geek-tech-short/CHECKLIST.md) 出片
+1. 选 **engine**（geek-dark | warm-editorial）
+2. Geek → 填 v2 `job.json`；Editorial → 填 `EditorialVideoConfig` / 改 `demos.ts`
+3. 有口播的 Geek 片 → `clock: "dynamic"`，禁止写死 `hookEnd: 120`
+4. 对照 [`CHECKLIST.md`](skills/geek-tech-short/CHECKLIST.md) 出片
+
+提示词：[`PROMPT.md`](skills/geek-tech-short/PROMPT.md)
 
 ---
 
@@ -107,7 +110,7 @@ npm run dev
 npx skills add remotion-dev/skills -a cursor -y
 ```
 
-本 skill 管「形态 / 干货 / 隐喻 / 时钟 / 平台安全区」；官方 skill 管 Remotion API / Studio / render。
+本 skill 管「引擎 / 形态 / 干货 / 隐喻 / 时钟 / 平台安全区」；官方 skill 管 Remotion API / Studio / render。
 
 ## License
 

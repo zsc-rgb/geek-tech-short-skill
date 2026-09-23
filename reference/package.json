@@ -24,6 +24,9 @@
     "render:code": "npm run clock -- jobs/code-refactor.job.json && remotion render CodeRefactorShort out/code-refactor.mp4",
     "render:arch": "npm run clock -- jobs/architecture-flow.job.json && remotion render ArchitectureFlowShort out/architecture-flow.mp4",
     "render:race": "npm run clock -- jobs/benchmark-race.job.json && remotion render BenchmarkRaceShort out/benchmark-race.mp4",
+    "render:editorial-table": "remotion render EditorialTableShort out/editorial-table.mp4",
+    "render:editorial-icons": "remotion render EditorialIconGridShort out/editorial-icons.mp4",
+    "render:editorial-flow": "remotion render EditorialFlowShort out/editorial-flow.mp4",
     "lint": "tsc --noEmit"
   }
 }
