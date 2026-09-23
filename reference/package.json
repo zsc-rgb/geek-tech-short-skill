@@ -27,6 +27,7 @@
     "render:editorial-table": "remotion render EditorialTableShort out/editorial-table.mp4",
     "render:editorial-icons": "remotion render EditorialIconGridShort out/editorial-icons.mp4",
     "render:editorial-flow": "remotion render EditorialFlowShort out/editorial-flow.mp4",
+    "render:jev": "remotion render JevReleaseShort out/jev-release.mp4",
     "lint": "tsc --noEmit"
   }
 }

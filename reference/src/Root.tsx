@@ -8,6 +8,8 @@ import {
   DEMO_EDITORIAL_FLOW,
   DEMO_EDITORIAL_ICONS,
   DEMO_EDITORIAL_TABLE,
+  JevReleaseShort,
+  JEV_RELEASE_DURATION,
 } from "./EditorialShort";
 
 const fps = 30;
@@ -70,6 +72,14 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{ config: DEMO_EDITORIAL_FLOW }}
+      />
+      <Composition
+        id="JevReleaseShort"
+        component={JevReleaseShort}
+        durationInFrames={JEV_RELEASE_DURATION}
+        fps={fps}
+        width={1080}
+        height={1920}
       />
     </>
   );
